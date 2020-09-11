@@ -189,13 +189,22 @@ class TVClient {
         
     }
     
-    func downloadeImages(path: String, completion: @escaping (Bool, Error?) -> Void) {
+    func downloadeImages(path: String, imageType: HorizantalCollectionViewDataSource.HorizantalCollectionViewType, completion: @escaping (Bool, Error?) -> Void) {
         let url = TVClient.ImageEndPoints.getOriginalImage(path: path).stringValue;
         AF.request(url).response { (response) in
             guard let data = response.data else { return }
             let image = UIImage(data: data);
 //            HorizantalCollectionViewDataSource.posterImages.append(image);
-            HorizantalCollectionViewDataSource.posterImages[HorizantalCollectionViewDataSource.posterImages.firstIndex(of: nil) ?? 0] = image;
+//            HorizantalCollectionViewDataSource.posterImages[HorizantalCollectionViewDataSource.posterImages.firstIndex(of: nil) ?? 0] = image;
+
+            switch imageType {
+            case .tv:
+                _ = HorizantalCollectionViewDataSource.HorizantalCollectionViewType.tv(image: image).setData
+
+            case .movie:
+                _ = HorizantalCollectionViewDataSource.HorizantalCollectionViewType.movie(image: image).setData
+            }
+//            HorizantalCollectionViewDataSource.data[0][HorizantalCollectionViewDataSource.data[0].firstIndex(of: nil) ?? 0] = image;
 //            for i in 0..<HorizantalCollectionViewDataSource.imagesToLoade {
 //                if HorizantalCollectionViewDataSource.posterImages[i] == nil {
 //                    HorizantalCollectionViewDataSource.posterImages[i] = image;

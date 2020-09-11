@@ -8,19 +8,20 @@
 
 import UIKit
 
-protocol SetHorizantalCollectionViewDelegate {
-    func setDelegate();
-}
+//protocol SetHorizantalCollectionViewDelegate {
+//    func setDelegate();
+//}
 
-class VerticalCollectionViewController: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, SetHorizantalCollectionViewDelegate {
-    var custom: customHorizantalCollectionViewDelegate?;
+class VerticalCollectionViewController: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
+//    var custom: customHorizantalCollectionViewDelegate?;
     func setDelegate() {
         
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
 //
-        3
+//        3
+        HorizantalCollectionViewDataSource.data.count;
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        4
@@ -46,19 +47,28 @@ class VerticalCollectionViewController: NSObject, UICollectionViewDataSource, UI
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: UICollectionViewCell;
-        print(indexPath.section);
-        HorizantalCollectionViewDataSource.currentSection = indexPath.section;
+//        print(indexPath.section);
+//        HorizantalCollectionViewDataSource.currentSection = indexPath.section;
         if indexPath.section == 0 {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
                 cell.backgroundColor = .darkGray;
-                //            custom?.reloadeCollectionView();
-                //            print(custom);
-                //            VerticalCollectionViewCell.init(frame: CGR)
-                cell.setNeedsLayout();
+                cell.data = HorizantalCollectionViewDataSource.data[indexPath.item];
+                VerticalCollectionViewCell.type = .tv;
+                cell.layoutSubviews();
+//                cell.setNeedsLayout();
                 return cell;
             }
         }
-        
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
+                        cell.backgroundColor = .darkGray;
+                        VerticalCollectionViewCell.type = .tv;
+                        cell.data = HorizantalCollectionViewDataSource.data[indexPath.item];
+            VerticalCollectionViewCell.type = .movie;
+            cell.layoutSubviews();
+        //                cell.setNeedsLayout();
+                        return cell;
+                    }
+//        VerticalCollectionViewCell.type = .movie;
 //        if indexPath.row == 0 {
 //            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
 //                cell.backgroundColor = .darkGray;
@@ -71,7 +81,7 @@ class VerticalCollectionViewController: NSObject, UICollectionViewDataSource, UI
 //        }
         
 //        cell.backgroundColor = .systemBlue;
-        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath);
+        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath);
         cell.backgroundColor = .systemRed;
         return cell;
     }

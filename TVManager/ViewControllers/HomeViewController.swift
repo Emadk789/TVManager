@@ -11,19 +11,19 @@ import UIKit
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var VerticalCollectionView: UICollectionView!
-    lazy var vViewController = VerticalCollectionViewController();
+    lazy var verticalCollectionViewController = VerticalCollectionViewController();
 //    let verticalCollectionViewCell = VerticalCollectionViewCell();
-    var custom: customHorizantalCollectionViewDelegate?;
+//    var custom: customHorizantalCollectionViewDelegate?;
     override func viewDidLoad() {
         super.viewDidLoad();
         // TODO: Add an escaping closure to know when the finishes and then start downloading the images and reloade the vViewController
         TVClient.shared.getPopularTVShows(completion: self.handelGetPopularTVShowsResponse(response:error:));
 
-        VerticalCollectionView.delegate = vViewController;
-        VerticalCollectionView.dataSource = vViewController;
+        VerticalCollectionView.delegate = verticalCollectionViewController;
+        VerticalCollectionView.dataSource = verticalCollectionViewController;
 //        custom?.reloadeCollectionView();
 //        print(custom);
-        
+//        vViewController.
 //        verticalCollectionViewCell.
         // Do any additional setup after loading the view.
     }
@@ -41,10 +41,16 @@ class HomeViewController: UIViewController {
 //            for i in 0..<response.results.count {
 //                HorizantalCollectionViewDataSource.posterImages[i] = nil;
 //            }
+            let tempArray: [UIImage?] = [];
+            HorizantalCollectionViewDataSource.data.append(tempArray);
+            HorizantalCollectionViewDataSource.data.append(tempArray);
+            
             for result in response.results {
 //                HorizantalCollectionViewDataSource.posterImages[
-                HorizantalCollectionViewDataSource.posterImages.append(nil);
-                TVClient.shared.downloadeImages(path: result.posterPath!, completion: self.handelImageResponse(success:error:))
+//                HorizantalCollectionViewDataSource.posterImages.append(nil);
+                HorizantalCollectionViewDataSource.data[0].append(nil);
+                HorizantalCollectionViewDataSource.data[1].append(nil);
+                TVClient.shared.downloadeImages(path: result.posterPath!, imageType: .tv(image: nil), completion: self.handelImageResponse(success:error:))
             }
         }
         
