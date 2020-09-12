@@ -25,7 +25,7 @@ struct HorizantalCollectionViewDataSource {
             switch self {
             case .tv(let image):
                 HorizantalCollectionViewDataSource.data[0][HorizantalCollectionViewDataSource.data[0].firstIndex(of: nil) ?? 0] = image;
-                HorizantalCollectionViewDataSource.data[1][HorizantalCollectionViewDataSource.data[1].firstIndex(of: nil) ?? 0] = image;
+//                HorizantalCollectionViewDataSource.data[1][HorizantalCollectionViewDataSource.data[1].firstIndex(of: nil) ?? 0] = image;
             case .movie(let image):
                 HorizantalCollectionViewDataSource.data[1][HorizantalCollectionViewDataSource.data[1].firstIndex(of: nil) ?? 0] = image;
 //            default:

@@ -9,13 +9,11 @@
 import Foundation
 import Alamofire;
 
+typealias type = HorizantalCollectionViewDataSource.HorizantalCollectionViewType;
 class TVClient {
     public static let shared = TVClient();
     
-    private init() {
-        
-        
-    }
+    private init() {}
     
 //    "api_key": "1b2cb3475b2de18edda91152974690ca"
     static var hasSessionID: Bool = false;
@@ -77,7 +75,13 @@ class TVClient {
             case .getSessionID:
                 return URL(string: "\(TVClient.baseURL)authentication/session/new\(TVClient.Auth.APIKey)")!;
             case .getPopular(let popularKind):
-                return URL(string: "\(TVClient.baseURL)\(popularKind)/popular\(TVClient.Auth.APIKey)")!
+                switch popularKind {
+                case .tv:
+                    return URL(string: "\(TVClient.baseURL)\(popularKind)/popular\(TVClient.Auth.APIKey)")!
+                case .movie:
+                    return URL(string: "\(TVClient.baseURL)\(popularKind)/popular\(TVClient.Auth.APIKey)")!
+                }
+                
             }
 //            return "\(TVClient.baseURL)";
         }
@@ -162,48 +166,65 @@ class TVClient {
         
     }
     
-    func getPopularTVShows(completion: @escaping ((GetPopularResponse?, Error?) -> Void)){
-        let url = TVClient.EndPoints.getPopular(.tv).stringURL;
+    func getDecodableRequest<Response: Decodable>(url: URL, imageType: type, response: Response.Type,completion: @escaping ((Response?, type, Error?) -> Void)) {
         
-        //TODO: Get the popular tv shows and show them in the horizantal collection view controller
-        AF.request(url).responseJSON { (response) in
+        AF.request(url).responseDecodable(of: response, decoder: TVClient.decoder) { (response) in
+            debugPrint(response);
             switch response.result {
-            case .success:
-                guard let data = response.data else { return }
-//                print(response)
-//                debugPrint(response);
-                do {
-                    let result = try TVClient.decoder.decode(GetPopularResponse.self, from: data);
-                    completion(result, nil)
-//                    print(result)
-                } catch {
-                    print(error);
-                }
-                
-                break;
-            case .failure:
-                break;
+            case .success(let result):
+                print(result);
+                completion(result, imageType, nil);
+            case .failure(let error):
+                print(error);
+                completion(nil, imageType, error)
             }
         }
-        
-        
     }
     
-    func downloadeImages(path: String, imageType: HorizantalCollectionViewDataSource.HorizantalCollectionViewType, completion: @escaping (Bool, Error?) -> Void) {
+//    func getPopularTVShows(completion: @escaping ((GetPopularResponse?, Error?) -> Void)){
+//        let url = TVClient.EndPoints.getPopular(.tv).stringURL;
+//        getDecodableRequest(url: url, response: GetPopularResponse.self) { (response, error) in
+//
+//        }
+//        //TODO: Get the popular tv shows and show them in the horizantal collection view controller
+//        AF.request(url).responseJSON { (response) in
+//            switch response.result {
+//            case .success:
+//                guard let data = response.data else { return }
+////                print(response)
+////                debugPrint(response);
+//                do {
+//                    let result = try TVClient.decoder.decode(GetPopularResponse.self, from: data);
+//                    completion(result, nil)
+////                    print(result)
+//                } catch {
+//                    print(error);
+//                }
+//
+//                break;
+//            case .failure:
+//                break;
+//            }
+//        }
+//
+//
+//    }
+    
+    func downloadeImages(path: String, imageType: type, completion: @escaping (UIImage?, Error?, type) -> Void) {
         let url = TVClient.ImageEndPoints.getOriginalImage(path: path).stringValue;
         AF.request(url).response { (response) in
             guard let data = response.data else { return }
             let image = UIImage(data: data);
 //            HorizantalCollectionViewDataSource.posterImages.append(image);
 //            HorizantalCollectionViewDataSource.posterImages[HorizantalCollectionViewDataSource.posterImages.firstIndex(of: nil) ?? 0] = image;
-
-            switch imageType {
-            case .tv:
-                _ = HorizantalCollectionViewDataSource.HorizantalCollectionViewType.tv(image: image).setData
-
-            case .movie:
-                _ = HorizantalCollectionViewDataSource.HorizantalCollectionViewType.movie(image: image).setData
-            }
+            completion(image, nil, imageType);
+//            switch imageType {
+//            case .tv:
+//                _ = HorizantalCollectionViewDataSource.HorizantalCollectionViewType.tv(image: image).setData
+//
+//            case .movie:
+//                _ = HorizantalCollectionViewDataSource.HorizantalCollectionViewType.movie(image: image).setData
+//            }
 //            HorizantalCollectionViewDataSource.data[0][HorizantalCollectionViewDataSource.data[0].firstIndex(of: nil) ?? 0] = image;
 //            for i in 0..<HorizantalCollectionViewDataSource.imagesToLoade {
 //                if HorizantalCollectionViewDataSource.posterImages[i] == nil {
@@ -211,7 +232,7 @@ class TVClient {
 //                    break;
 //                }
 //            }
-            completion(true, nil);
+//            completion(true, nil);
         }
 //        AF.request(url).
     }

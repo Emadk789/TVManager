@@ -8,19 +8,9 @@
 
 import UIKit;
 
-//protocol customHorizantalCollectionViewDelegate {
-//    func reloadeCollectionView();
-//}
-
 class VerticalCollectionViewCell: UICollectionViewCell {
-//    var homeViewController: HomeViewController?;
-//    func reloadeCollectionView() {
-//        horizantalCollectionView.reloadData();
-//    }
     var data:[UIImage?] = [] {
         didSet {
-//            collectionView.releadData()
-//            horizantalCollectionView.data
             horizantalCollectionViewController.data = data;
             horizantalCollectionView.reloadData();
         }
@@ -46,7 +36,7 @@ class VerticalCollectionViewCell: UICollectionViewCell {
 //        default:
 //            break
 //        }
-        print("layoutSubViews", VerticalCollectionViewCell.type)
+//        print("layoutSubViews", VerticalCollectionViewCell.type)
         horizantalCollectionView.delegate = horizantalCollectionViewController;
         horizantalCollectionView.dataSource = horizantalCollectionViewController;
 //        switch VerticalCollectionViewCell.type {
@@ -66,7 +56,7 @@ class VerticalCollectionViewCell: UICollectionViewCell {
 //        horizantalCollectionView.reloadData();
         
     }
-    func test() {}
+//    func test() {}
     override init(frame: CGRect) {
         super.init(frame: frame);
         horizantalCollectionView.delegate = horizantalCollectionViewController;

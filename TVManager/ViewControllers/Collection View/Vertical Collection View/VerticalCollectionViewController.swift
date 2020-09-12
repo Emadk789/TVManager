@@ -8,28 +8,20 @@
 
 import UIKit
 
-//protocol SetHorizantalCollectionViewDelegate {
-//    func setDelegate();
-//}
-
-class VerticalCollectionViewController: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
-//    var custom: customHorizantalCollectionViewDelegate?;
-    func setDelegate() {
-        
-    }
+class VerticalCollectionViewController: CollectionView, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-//
-//        3
+        //
+        //        3
         HorizantalCollectionViewDataSource.data.count;
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        4
+        //        4
         1
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-
+        
         if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as? CollectionViewHeader{
             var header = "Popular";
             switch indexPath.section {
@@ -47,49 +39,36 @@ class VerticalCollectionViewController: NSObject, UICollectionViewDataSource, UI
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: UICollectionViewCell;
-//        print(indexPath.section);
-//        HorizantalCollectionViewDataSource.currentSection = indexPath.section;
+
         if indexPath.section == 0 {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
                 cell.backgroundColor = .darkGray;
-                cell.data = HorizantalCollectionViewDataSource.data[indexPath.item];
-                VerticalCollectionViewCell.type = .tv;
+                cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
+//                VerticalCollectionViewCell.type = .tv;
                 cell.layoutSubviews();
-//                cell.setNeedsLayout();
+                //                cell.setNeedsLayout();
                 return cell;
             }
         }
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
-                        cell.backgroundColor = .darkGray;
-                        VerticalCollectionViewCell.type = .tv;
-                        cell.data = HorizantalCollectionViewDataSource.data[indexPath.item];
-            VerticalCollectionViewCell.type = .movie;
+            cell.backgroundColor = .darkGray;
+//            VerticalCollectionViewCell.type = .tv;
+            cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
+//            VerticalCollectionViewCell.type = .movie;
             cell.layoutSubviews();
-        //                cell.setNeedsLayout();
-                        return cell;
-                    }
-//        VerticalCollectionViewCell.type = .movie;
-//        if indexPath.row == 0 {
-//            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
-//                cell.backgroundColor = .darkGray;
-//                //            custom?.reloadeCollectionView();
-//                //            print(custom);
-//                //            VerticalCollectionViewCell.init(frame: CGR)
-//                cell.setNeedsLayout();
-//                return cell;
-//            }
-//        }
+            //                cell.setNeedsLayout();
+            return cell;
+        }
         
-//        cell.backgroundColor = .systemBlue;
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath);
         cell.backgroundColor = .systemRed;
         return cell;
     }
-
+    
 }
 
-extension VerticalCollectionViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+extension VerticalCollectionViewController {
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let bounds = collectionView.bounds;
         let size: CGSize;
         

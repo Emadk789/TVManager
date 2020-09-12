@@ -18,9 +18,10 @@ struct GetPopularResponse: Decodable {
 
 struct Result: Decodable {
     let posterPath: String?,
-    popularity: Double,
-    id: Int,
-    name: String,
-    originalName: String
+    popularity: Double?,
+    id: Int?,
+    name: String?,
+    title: String?,
+    originalName: String?
     
 }
