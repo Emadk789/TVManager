@@ -18,55 +18,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        
-//            let myurl = URL(string: "https://developers.themoviedb.org/3/");
-//        TVClient.shared.authUsers();
-        
-//        JSONSerialization.
-//        let url = URL(string: "https://api.themoviedb.org/3/movie/550")!;
-//        URLSession.shared.dataTask(with: URL(string: "https://api.themoviedb.org/3/movie/550?api_key=1b2cb3475b2de18edda91152974690ca")!);
-//        let param = ["api_key": "1b2cb3475b2de18edda91152974690ca"]
-//        AF.request(url, parameters: param).responseData { (response) in
-//            let decoder = JSONDecoder();
-//            do {
-//                let result = try decoder.decode(Welcome.self, from: response.data!);
-//                print("First result \n", result);
-//            } catch {
-//                print(error);
-//            }
-//        }
-//        AF.request(url, parameters: param).responseJSON { (response) in
-//            let decoder = JSONDecoder();
-//            do {
-//                let result = try decoder.decode(Welcome.self, from: response.data!);
-//                print("Second result \n", result);
-//            } catch {
-//                print(error);
-//            }
-//            print(response)
-//            print("\n\n\n")
-//            debugPrint(response);
-//        }
-//        AF.request(url, parameters: param).response { response in
-////            debugPrint(response);
-//            print(response);
-//        }
-//        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-//            let d = data;
-//            let r = response;
-//            let e = error;
-//            let decoder = JSONDecoder();
-//            do {
-//               let result = try decoder.decode(Welcome.self, from: d!);
-//                print(result);
-//            } catch {
-//                print(error);
-//            }
-//
-//        }.resume();
-        
         
     }
 //    override func viewWillAppear(_ animated: Bool) {
@@ -88,7 +39,7 @@ class LoginViewController: UIViewController {
 //        print(sessionID);
         if let sessionID = sessionID {
             TVClient.Auth.SetSessionID(id: sessionID);
-            instatiateHomeViewController();
+            instatiateTabBarController();
         } else {
             TVClient.shared.authUsers();
         }
@@ -110,12 +61,15 @@ class LoginViewController: UIViewController {
     
     func HandelLoginAuth(success: Bool, error: Error?) {
         if(success) {
-            instatiateHomeViewController();
+            instatiateTabBarController();
         }
     }
-    func instatiateHomeViewController() {
-        let homeViewController = storyboard?.instantiateViewController(identifier: "HomeViewController") as! HomeViewController
-        present(homeViewController, animated: true)
+    func instatiateTabBarController() {
+//        let homeViewController = storyboard?.instantiateViewController(identifier: "HomeViewController") as! HomeViewController
+//        TabBarController
+        let tabBarController = (storyboard?.instantiateViewController(identifier: "TabBarController"))!
+        tabBarController.modalPresentationStyle = .fullScreen;
+        present(tabBarController, animated: false)
     }
     
 }

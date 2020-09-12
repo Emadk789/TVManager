@@ -40,23 +40,19 @@ class VerticalCollectionViewController: CollectionView, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: UICollectionViewCell;
 
-        if indexPath.section == 0 {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
-                cell.backgroundColor = .darkGray;
-                cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
-//                VerticalCollectionViewCell.type = .tv;
-                cell.layoutSubviews();
-                //                cell.setNeedsLayout();
-                return cell;
-            }
-        }
+//        if indexPath.section == 0 {
+//            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
+//                cell.backgroundColor = .darkGray;
+//                cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
+////                VerticalCollectionViewCell.type = .tv;
+////                cell.layoutSubviews();
+//                //                cell.setNeedsLayout();
+//                return cell;
+//            }
+//        }
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
-            cell.backgroundColor = .darkGray;
-//            VerticalCollectionViewCell.type = .tv;
+//            cell.backgroundColor = .darkGray;
             cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
-//            VerticalCollectionViewCell.type = .movie;
-            cell.layoutSubviews();
-            //                cell.setNeedsLayout();
             return cell;
         }
         

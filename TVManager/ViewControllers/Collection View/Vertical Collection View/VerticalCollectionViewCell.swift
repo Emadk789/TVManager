@@ -24,19 +24,6 @@ class VerticalCollectionViewCell: UICollectionViewCell {
     }
     static var type: HorizantalCollectionViewType = .tv;
     override func layoutSubviews() {
-//        homeViewController?.custom = self;
-//        print(homeViewController)
-//        enum what {
-//
-//        }
-//        let type = WhatType.movie
-//        switch type {
-//        case .tv:
-//            break
-//        default:
-//            break
-//        }
-//        print("layoutSubViews", VerticalCollectionViewCell.type)
         horizantalCollectionView.delegate = horizantalCollectionViewController;
         horizantalCollectionView.dataSource = horizantalCollectionViewController;
 //        switch VerticalCollectionViewCell.type {
@@ -59,8 +46,8 @@ class VerticalCollectionViewCell: UICollectionViewCell {
 //    func test() {}
     override init(frame: CGRect) {
         super.init(frame: frame);
-        horizantalCollectionView.delegate = horizantalCollectionViewController;
-        horizantalCollectionView.dataSource = horizantalCollectionViewController;
+//        horizantalCollectionView.delegate = horizantalCollectionViewController;
+//        horizantalCollectionView.dataSource = horizantalCollectionViewController;
     }
     
     required init?(coder: NSCoder) {

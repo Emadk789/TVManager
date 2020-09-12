@@ -217,7 +217,10 @@ class TVClient {
             let image = UIImage(data: data);
 //            HorizantalCollectionViewDataSource.posterImages.append(image);
 //            HorizantalCollectionViewDataSource.posterImages[HorizantalCollectionViewDataSource.posterImages.firstIndex(of: nil) ?? 0] = image;
-            completion(image, nil, imageType);
+            DispatchQueue.main.async {
+                completion(image, nil, imageType);
+            }
+            
 //            switch imageType {
 //            case .tv:
 //                _ = HorizantalCollectionViewDataSource.HorizantalCollectionViewType.tv(image: image).setData
