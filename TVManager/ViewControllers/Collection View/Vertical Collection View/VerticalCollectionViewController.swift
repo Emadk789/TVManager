@@ -39,17 +39,7 @@ class VerticalCollectionViewController: CollectionView, UICollectionViewDataSour
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: UICollectionViewCell;
-
-//        if indexPath.section == 0 {
-//            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
-//                cell.backgroundColor = .darkGray;
-//                cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
-////                VerticalCollectionViewCell.type = .tv;
-////                cell.layoutSubviews();
-//                //                cell.setNeedsLayout();
-//                return cell;
-//            }
-//        }
+        
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
 //            cell.backgroundColor = .darkGray;
             cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];

@@ -74,6 +74,51 @@
             </objects>
             <point key="canvasLocation" x="-42" y="78"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="NER-au-cEj">
+            <objects>
+                <viewController storyboardIdentifier="SearchViewController" id="IWC-1X-DoK" customClass="SearchViewController" customModule="TVManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8o2-Fy-NrG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BBn-1m-gDp">
+                                <rect key="frame" x="164" y="45" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1oh-PS-DXB">
+                                <rect key="frame" x="0.0" y="100" width="375" height="567"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="519-He-jdB">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="519-He-jdB" id="ZzW-oQ-kmd">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="1oh-PS-DXB" firstAttribute="top" secondItem="EhB-dl-fet" secondAttribute="top" constant="100" id="6uQ-nI-WYY"/>
+                            <constraint firstItem="1oh-PS-DXB" firstAttribute="leading" secondItem="EhB-dl-fet" secondAttribute="leading" id="ntG-HG-V2q"/>
+                            <constraint firstItem="1oh-PS-DXB" firstAttribute="bottom" secondItem="EhB-dl-fet" secondAttribute="bottom" id="oM2-mZ-TeI"/>
+                            <constraint firstItem="1oh-PS-DXB" firstAttribute="trailing" secondItem="EhB-dl-fet" secondAttribute="trailing" id="xhV-ZT-lU6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EhB-dl-fet"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="1oh-PS-DXB" id="pIi-XD-x86"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LCP-gc-Tvh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2392.8000000000002" y="-923.38830584707648"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="Fp0-bA-y4b">
             <objects>
@@ -177,21 +222,33 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIG-eU-kd5">
+                                <rect key="frame" x="326" y="52" width="20" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" image="magnifyingglass" catalog="system"/>
+                                <connections>
+                                    <action selector="searchButtonClicked:" destination="pcm-37-tdY" eventType="touchUpInside" id="Lfc-M9-5R2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="RoQ-pG-DZO" firstAttribute="bottom" secondItem="Jv2-Mm-VIH" secondAttribute="bottom" id="8nF-TV-mB9"/>
+                            <constraint firstItem="gIG-eU-kd5" firstAttribute="top" secondItem="RoQ-pG-DZO" secondAttribute="top" constant="8" id="Aeo-eb-xYo"/>
                             <constraint firstItem="Jv2-Mm-VIH" firstAttribute="trailing" secondItem="RoQ-pG-DZO" secondAttribute="trailing" id="FuZ-Lg-nWJ"/>
                             <constraint firstItem="FYL-LW-2U5" firstAttribute="leading" secondItem="RoQ-pG-DZO" secondAttribute="leading" constant="8" id="NwD-he-GwC"/>
                             <constraint firstItem="Jv2-Mm-VIH" firstAttribute="top" secondItem="FYL-LW-2U5" secondAttribute="bottom" constant="8" id="Ttt-Bv-gJr"/>
                             <constraint firstItem="RoQ-pG-DZO" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="FYL-LW-2U5" secondAttribute="trailing" constant="293" id="XwD-rd-idr"/>
                             <constraint firstItem="Jv2-Mm-VIH" firstAttribute="leading" secondItem="RoQ-pG-DZO" secondAttribute="leading" id="Y5a-yx-359"/>
+                            <constraint firstItem="gIG-eU-kd5" firstAttribute="leading" secondItem="FYL-LW-2U5" secondAttribute="trailing" constant="176.5" id="YGF-HC-8rS"/>
+                            <constraint firstItem="RoQ-pG-DZO" firstAttribute="trailing" secondItem="gIG-eU-kd5" secondAttribute="trailing" constant="29" id="joS-Nc-jCI"/>
+                            <constraint firstItem="Jv2-Mm-VIH" firstAttribute="top" secondItem="gIG-eU-kd5" secondAttribute="bottom" constant="8" id="kHZ-VX-AFI"/>
                             <constraint firstItem="FYL-LW-2U5" firstAttribute="top" secondItem="RoQ-pG-DZO" secondAttribute="top" constant="8" id="qsX-r1-SJT"/>
                             <constraint firstItem="FYL-LW-2U5" firstAttribute="top" secondItem="RoQ-pG-DZO" secondAttribute="top" constant="8" id="wrC-9k-OOe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RoQ-pG-DZO"/>
                     </view>
-                    <navigationItem key="navigationItem" id="h8D-YU-f91"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="h8D-YU-f91"/>
                     <connections>
                         <outlet property="VerticalCollectionView" destination="Jv2-Mm-VIH" id="Ony-jW-RIh"/>
                     </connections>
@@ -367,7 +424,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="w7r-d1-0zR" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="bBu-58-vHA"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OiK-D5-KMq">
+                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OiK-D5-KMq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -400,4 +457,7 @@
             <point key="canvasLocation" x="1561" y="421"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+    </resources>
 </document>

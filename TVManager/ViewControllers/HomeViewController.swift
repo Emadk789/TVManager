@@ -39,6 +39,12 @@ class HomeViewController: UIViewController {
 //        custom?.reloadeCollectionView();
 //        print(custom);
     }
+    @IBAction func searchButtonClicked(_ sender: Any) {
+        let searchViewController = storyboard?.instantiateViewController(identifier: "SearchViewController") as! SearchViewController
+//        show(searchViewController, sender: self);
+        present(searchViewController, animated: true, completion: nil);
+    }
+    
     func handelGetPopularTVShowsResponse(response: GetPopularResponse?, imageType: HorizantalCollectionViewDataSource.HorizantalCollectionViewType, error: Error?) {
         if error != nil { return }
         if let response = response {
