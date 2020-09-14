@@ -82,37 +82,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BBn-1m-gDp">
-                                <rect key="frame" x="164" y="45" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1oh-PS-DXB">
                                 <rect key="frame" x="0.0" y="100" width="375" height="567"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="519-He-jdB">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="117" id="519-He-jdB" customClass="SearchTableViewCell" customModule="TVManager" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="519-He-jdB" id="ZzW-oQ-kmd">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="519-He-jdB" id="ZzW-oQ-kmd" customClass="SearchTableViewCell" customModule="TVManager" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uao-ZQ-UNY">
+                                                    <rect key="frame" x="0.0" y="0.0" width="175" height="117"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="uao-ZQ-UNY" secondAttribute="trailing" constant="200" id="DjJ-NR-YAj"/>
+                                                <constraint firstAttribute="bottom" secondItem="uao-ZQ-UNY" secondAttribute="bottom" id="Im9-cP-IBu"/>
+                                                <constraint firstItem="uao-ZQ-UNY" firstAttribute="leading" secondItem="ZzW-oQ-kmd" secondAttribute="leading" id="Tw2-bS-YMl"/>
+                                                <constraint firstItem="uao-ZQ-UNY" firstAttribute="top" secondItem="ZzW-oQ-kmd" secondAttribute="top" id="Ztp-nj-KA4"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="myImageView" destination="uao-ZQ-UNY" id="Rod-iN-UU0"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eca-uW-6M9">
+                                <rect key="frame" x="8" y="50" width="351" height="42"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JCP-vf-adO">
+                                        <rect key="frame" x="0.0" y="0.0" width="323" height="42"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zug-B9-8dN">
+                                        <rect key="frame" x="331" y="0.0" width="20" height="42"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <state key="normal" image="magnifyingglass" catalog="system"/>
+                                        <connections>
+                                            <action selector="searchButtonClicked:" destination="pcm-37-tdY" eventType="touchUpInside" id="YKq-4o-KCr"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="eca-uW-6M9" firstAttribute="leading" secondItem="EhB-dl-fet" secondAttribute="leading" constant="8" id="3IO-PN-pc8"/>
                             <constraint firstItem="1oh-PS-DXB" firstAttribute="top" secondItem="EhB-dl-fet" secondAttribute="top" constant="100" id="6uQ-nI-WYY"/>
+                            <constraint firstItem="EhB-dl-fet" firstAttribute="trailing" secondItem="eca-uW-6M9" secondAttribute="trailing" constant="16" id="CuM-4Q-wPn"/>
+                            <constraint firstItem="eca-uW-6M9" firstAttribute="top" secondItem="EhB-dl-fet" secondAttribute="top" constant="50" id="h15-G3-2OR"/>
                             <constraint firstItem="1oh-PS-DXB" firstAttribute="leading" secondItem="EhB-dl-fet" secondAttribute="leading" id="ntG-HG-V2q"/>
                             <constraint firstItem="1oh-PS-DXB" firstAttribute="bottom" secondItem="EhB-dl-fet" secondAttribute="bottom" id="oM2-mZ-TeI"/>
+                            <constraint firstItem="1oh-PS-DXB" firstAttribute="top" secondItem="eca-uW-6M9" secondAttribute="bottom" constant="8" id="wdD-u1-r4P"/>
                             <constraint firstItem="1oh-PS-DXB" firstAttribute="trailing" secondItem="EhB-dl-fet" secondAttribute="trailing" id="xhV-ZT-lU6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="EhB-dl-fet"/>
                     </view>
                     <connections>
+                        <outlet property="searchButton" destination="Zug-B9-8dN" id="Afk-Ex-cu7"/>
                         <outlet property="tableView" destination="1oh-PS-DXB" id="pIi-XD-x86"/>
+                        <outlet property="textField" destination="JCP-vf-adO" id="q0M-Xf-pKC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LCP-gc-Tvh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -251,6 +284,7 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="h8D-YU-f91"/>
                     <connections>
                         <outlet property="VerticalCollectionView" destination="Jv2-Mm-VIH" id="Ony-jW-RIh"/>
+                        <outlet property="searchButton" destination="gIG-eU-kd5" id="69M-Sf-nQA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Skf-Wu-dPI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

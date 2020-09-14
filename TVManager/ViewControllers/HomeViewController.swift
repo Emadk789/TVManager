@@ -12,6 +12,9 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var VerticalCollectionView: UICollectionView!
     lazy var verticalCollectionViewController = VerticalCollectionViewController();
+    
+    @IBOutlet weak var searchButton: UIButton!
+    
 //    let verticalCollectionViewCell = VerticalCollectionViewCell();
 //    var custom: customHorizantalCollectionViewDelegate?;
     
@@ -35,11 +38,12 @@ class HomeViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
-        
+        searchButton.isHidden = false;
 //        custom?.reloadeCollectionView();
 //        print(custom);
     }
     @IBAction func searchButtonClicked(_ sender: Any) {
+        searchButton.isHidden = !searchButton.isHidden;
         let searchViewController = storyboard?.instantiateViewController(identifier: "SearchViewController") as! SearchViewController
 //        show(searchViewController, sender: self);
         present(searchViewController, animated: true, completion: nil);
@@ -111,15 +115,5 @@ class HomeViewController: UIViewController {
         }
         VerticalCollectionView.reloadData();
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

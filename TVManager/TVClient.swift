@@ -59,6 +59,8 @@ class TVClient {
         case auth;
         case loginAuth;
         case getSessionID;
+        case searchKeyWords(query: String);
+        case searchMovie(query: String);
         
         case getPopular(PupularKind);
         enum PupularKind {
@@ -81,7 +83,10 @@ class TVClient {
                 case .movie:
                     return URL(string: "\(TVClient.baseURL)\(popularKind)/popular\(TVClient.Auth.APIKey)")!
                 }
-                
+            case .searchKeyWords(let query):
+                return URL(string: "\(TVClient.baseURL)search/keyword\(TVClient.Auth.APIKey)&query=\(query)")!
+            case .searchMovie(let query):
+                return URL(string: "\(TVClient.baseURL)search/movie\(TVClient.Auth.APIKey)&query=\(query)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")!
             }
 //            return "\(TVClient.baseURL)";
         }
