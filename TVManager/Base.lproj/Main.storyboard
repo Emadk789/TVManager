@@ -86,27 +86,29 @@
                                 <rect key="frame" x="0.0" y="100" width="375" height="567"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="117" id="519-He-jdB" customClass="SearchTableViewCell" customModule="TVManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="99e-M1-U1w" detailTextLabel="CG1-7u-M8a" rowHeight="117" style="IBUITableViewCellStyleSubtitle" id="519-He-jdB" customClass="SearchTableViewCell" customModule="TVManager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="519-He-jdB" id="ZzW-oQ-kmd" customClass="SearchTableViewCell" customModule="TVManager" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uao-ZQ-UNY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="175" height="117"/>
-                                                </imageView>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="99e-M1-U1w">
+                                                    <rect key="frame" x="15" y="38" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CG1-7u-M8a">
+                                                    <rect key="frame" x="15" y="61.5" width="44" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="uao-ZQ-UNY" secondAttribute="trailing" constant="200" id="DjJ-NR-YAj"/>
-                                                <constraint firstAttribute="bottom" secondItem="uao-ZQ-UNY" secondAttribute="bottom" id="Im9-cP-IBu"/>
-                                                <constraint firstItem="uao-ZQ-UNY" firstAttribute="leading" secondItem="ZzW-oQ-kmd" secondAttribute="leading" id="Tw2-bS-YMl"/>
-                                                <constraint firstItem="uao-ZQ-UNY" firstAttribute="top" secondItem="ZzW-oQ-kmd" secondAttribute="top" id="Ztp-nj-KA4"/>
-                                            </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="myImageView" destination="uao-ZQ-UNY" id="Rod-iN-UU0"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -307,21 +309,61 @@
             </objects>
             <point key="canvasLocation" x="1457" y="1112"/>
         </scene>
-        <!--View Controller-->
+        <!--Account View Controller-->
         <scene sceneID="dCJ-Mt-zEZ">
             <objects>
-                <viewController id="Vhq-Ru-iPd" sceneMemberID="viewController">
+                <viewController id="Vhq-Ru-iPd" customClass="AccountViewController" customModule="TVManager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OCR-T2-XGA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="to7-pi-SFK">
+                                <rect key="frame" x="0.0" y="80.5" width="375" height="537.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rfm-6v-33x">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Bhf-yS-W6K">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="3Em-ZX-nt9">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gu8-8K-SLm">
+                                <rect key="frame" x="166.5" y="52" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Gu8-8K-SLm" firstAttribute="centerX" secondItem="OCR-T2-XGA" secondAttribute="centerX" id="4Gm-Hi-jUM"/>
+                            <constraint firstItem="to7-pi-SFK" firstAttribute="bottom" secondItem="bFu-HL-TAe" secondAttribute="bottom" id="Hln-vC-usI"/>
+                            <constraint firstAttribute="trailing" secondItem="to7-pi-SFK" secondAttribute="trailing" id="J0U-VI-r46"/>
+                            <constraint firstItem="to7-pi-SFK" firstAttribute="top" secondItem="Gu8-8K-SLm" secondAttribute="bottom" constant="8" id="KML-9L-wKn"/>
+                            <constraint firstItem="Gu8-8K-SLm" firstAttribute="top" secondItem="bFu-HL-TAe" secondAttribute="top" constant="8" id="YwM-aM-zJ2"/>
+                            <constraint firstItem="to7-pi-SFK" firstAttribute="leading" secondItem="bFu-HL-TAe" secondAttribute="leading" id="f3o-wZ-aDf"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="bFu-HL-TAe"/>
                     </view>
                     <navigationItem key="navigationItem" id="hx3-tX-FDG"/>
+                    <connections>
+                        <outlet property="collectionView" destination="to7-pi-SFK" id="qic-fk-8Wd"/>
+                        <outlet property="userNameLabel" destination="Gu8-8K-SLm" id="JnG-Vh-VU2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="clH-zU-wvZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2396" y="421"/>
+            <point key="canvasLocation" x="2396" y="420.53973013493254"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vfn-pH-C00">
@@ -452,11 +494,11 @@
             </objects>
             <point key="canvasLocation" x="130" y="976"/>
         </scene>
-        <!--Item-->
+        <!--Discover-->
         <scene sceneID="Rch-H6-Fk8">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="w7r-d1-0zR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="bBu-58-vHA"/>
+                    <tabBarItem key="tabBarItem" title="Discover" image="magnifyingglass" catalog="system" id="bBu-58-vHA"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OiK-D5-KMq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -471,11 +513,11 @@
             </objects>
             <point key="canvasLocation" x="1562" y="-272"/>
         </scene>
-        <!--Item 1-->
+        <!--Account-->
         <scene sceneID="PCO-Tg-Oo4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jEO-AS-01q" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 1" id="vnD-2d-UFd"/>
+                    <tabBarItem key="tabBarItem" title="Account" image="person" catalog="system" id="vnD-2d-UFd"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HXL-rU-mvb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -493,5 +535,6 @@
     </scenes>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="person" catalog="system" width="128" height="117"/>
     </resources>
 </document>

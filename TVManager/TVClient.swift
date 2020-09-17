@@ -15,15 +15,18 @@ class TVClient {
     
     private init() {}
     
-//    "api_key": "1b2cb3475b2de18edda91152974690ca"
     static var hasSessionID: Bool = false;
     struct Auth {
         static fileprivate let APIKey: String = "?api_key=1b2cb3475b2de18edda91152974690ca";
         static fileprivate var token: String = "";
         static fileprivate var sessionID: String = "";
+        static fileprivate var accountID: String = "";
         
         static func SetSessionID(id: String){
             Auth.sessionID = id;
+        }
+        static func setAccountID(id: String){
+            Auth.accountID = id;
         }
         
     }
@@ -42,13 +45,14 @@ class TVClient {
             }
         }
     }
-//    static private let APIKey: String = "?api_key=1b2cb3475b2de18edda91152974690ca";
     
     static private var parmas: [String: String] = [:];
     
     static private var decoder:JSONDecoder {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase;
+        decoder.dateDecodingStrategy = .iso8601;
+        
         return decoder
     }
     static let defaults = UserDefaults.standard;
@@ -62,8 +66,12 @@ class TVClient {
         case searchKeyWords(query: String);
         case searchMovie(query: String);
         
-        case getPopular(PupularKind);
-        enum PupularKind {
+        case account;
+        case getCreatedLists(accountID: String);
+        case getFavorite(Kind);
+        
+        case getPopular(Kind);
+        enum Kind {
             case tv, movie;
         }
         
@@ -87,8 +95,19 @@ class TVClient {
                 return URL(string: "\(TVClient.baseURL)search/keyword\(TVClient.Auth.APIKey)&query=\(query)")!
             case .searchMovie(let query):
                 return URL(string: "\(TVClient.baseURL)search/movie\(TVClient.Auth.APIKey)&query=\(query)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")!
+            case .account:
+                return URL(string: "\(TVClient.baseURL)account\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
+            case .getCreatedLists(let accountID):
+                return URL(string: "\(TVClient.baseURL)account/\(accountID)/lists\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
+            case .getFavorite(let kind):
+                switch kind {
+                case .tv:
+                    return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/favorite/movies\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
+                case .movie:
+                    return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/favorite/movies\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
+                    
+                }
             }
-//            return "\(TVClient.baseURL)";
         }
     }
 

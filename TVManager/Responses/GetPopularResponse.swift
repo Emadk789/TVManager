@@ -22,6 +22,7 @@ struct Result: Decodable {
     id: Int?,
     name: String?,
     title: String?,
-    originalName: String?
+    originalName: String?,
+    overview: String?
     
 }
