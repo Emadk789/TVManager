@@ -26,6 +26,7 @@ class AccountViewController: UIViewController {
         collectionView.delegate = self;
         collectionView.dataSource = self;
         getAccout();
+        
     }
     
     private func getAccout() {
@@ -67,7 +68,7 @@ class AccountViewController: UIViewController {
 
 extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        3
+        1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         favoritResponse?.results.count ?? 5;
@@ -75,17 +76,18 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath);
-        switch indexPath.section {
-        case 0:
-            cell.backgroundColor = .systemPink;
-        case 1:
-            cell.backgroundColor = .systemBlue;
-        case 2:
-            cell.backgroundColor = .systemGray3;
-        default:
-            cell.backgroundColor = .systemGray;
-        }
+        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AccountViewControllerCell;
+        cell.backgroundColor = .systemTeal;
+//        switch indexPath.section {
+//        case 0:
+//            cell.backgroundColor = .systemPink;
+//        case 1:
+//            cell.backgroundColor = .systemBlue;
+//        case 2:
+//            cell.backgroundColor = .systemGray3;
+//        default:
+//            cell.backgroundColor = .systemGray;
+//        }
 //        cell.backgroundColor = .systemPink;
         return cell;
     }
@@ -95,7 +97,8 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
 extension AccountViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let bounds = collectionView.bounds;
-        let width: CGFloat = (bounds.width-(10*3*1.5))/3;
+//        let width: CGFloat = (bounds.width-(10*3*1.5))/3;
+        let width: CGFloat = bounds.width;
         let size = CGSize(width: width, height: 200)
         return size;
     }

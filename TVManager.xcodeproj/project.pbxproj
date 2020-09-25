@@ -34,6 +34,8 @@
 		696CEC7924FD4567005CBC78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 696CEC7824FD4567005CBC78 /* Assets.xcassets */; };
 		696CEC7C24FD4567005CBC78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 696CEC7A24FD4567005CBC78 /* LaunchScreen.storyboard */; };
 		697E6ADA250FEE5B008175A0 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697E6AD9250FEE5B008175A0 /* SearchTableViewCell.swift */; };
+		698861F4251E8F7F008662A9 /* AccountViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698861F3251E8F7F008662A9 /* AccountViewControllerCell.swift */; };
+		698861F8251E914A008662A9 /* AccountHorizantalCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698861F7251E914A008662A9 /* AccountHorizantalCollectionViewController.swift */; };
 		69BAA1692513C0F600C380E0 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BAA1682513C0F600C380E0 /* AccountViewController.swift */; };
 		69BAA16B2513C40C00C380E0 /* AccoutResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BAA16A2513C40C00C380E0 /* AccoutResponse.swift */; };
 		8E4E4101059D2CC9E6C4D792 /* libPods-TVManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5AEEC2C90F4FB9A9AA08046 /* libPods-TVManager.a */; };
@@ -70,6 +72,8 @@
 		696CEC7B24FD4567005CBC78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		696CEC7D24FD4567005CBC78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		697E6AD9250FEE5B008175A0 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		698861F3251E8F7F008662A9 /* AccountViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewControllerCell.swift; sourceTree = "<group>"; };
+		698861F7251E914A008662A9 /* AccountHorizantalCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHorizantalCollectionViewController.swift; sourceTree = "<group>"; };
 		69BAA1682513C0F600C380E0 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		69BAA16A2513C40C00C380E0 /* AccoutResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccoutResponse.swift; sourceTree = "<group>"; };
 		D5AEEC2C90F4FB9A9AA08046 /* libPods-TVManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TVManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,10 +174,12 @@
 				696CEC7324FD4563005CBC78 /* LoginViewController.swift */,
 				696639AE2504271B00B23B05 /* HomeViewController.swift */,
 				69BAA1682513C0F600C380E0 /* AccountViewController.swift */,
+				698861F3251E8F7F008662A9 /* AccountViewControllerCell.swift */,
 				6914EE05250C3E810031CA80 /* Collection View */,
 				6914EE02250C39D50031CA80 /* Extensions */,
 				6914EE08250E08740031CA80 /* SearchViewController.swift */,
 				697E6AD9250FEE5B008175A0 /* SearchTableViewCell.swift */,
+				698861F7251E914A008662A9 /* AccountHorizantalCollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 				696CEC7024FD4563005CBC78 /* AppDelegate.swift in Sources */,
 				696639A52502DCE100B23B05 /* TokenResponse.swift in Sources */,
 				69BAA16B2513C40C00C380E0 /* AccoutResponse.swift in Sources */,
+				698861F8251E914A008662A9 /* AccountHorizantalCollectionViewController.swift in Sources */,
 				696639B42505708E00B23B05 /* VerticalCollectionViewCell.swift in Sources */,
 				6914EE07250C54D10031CA80 /* GetPopularMovieResponse.swift in Sources */,
 				6914EE04250C3A1C0031CA80 /* CollectionView.swift in Sources */,
@@ -357,6 +364,7 @@
 				6914EDF9250763FB0031CA80 /* HorizantalCollectionViewDataSource.swift in Sources */,
 				6966399D24FE792400B23B05 /* Network.swift in Sources */,
 				696CEC7224FD4563005CBC78 /* SceneDelegate.swift in Sources */,
+				698861F4251E8F7F008662A9 /* AccountViewControllerCell.swift in Sources */,
 				696639B62505738500B23B05 /* HorizantalCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
