@@ -11,12 +11,13 @@ import UIKit
 class SearchViewController: UIViewController  {
     
       
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
     
+    var searchButtonDelegate: SearchButton!;
     var data: [UIImage?] = [] {
         didSet {
             tableView.reloadData();
@@ -38,6 +39,12 @@ class SearchViewController: UIViewController  {
         textField.delegate = self;
         tableView.delegate = self;
         tableView.dataSource = self;
+        
+//        searchButtonDelegate = self;
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated);
+        searchButtonDelegate.toggelSearchButton();
     }
 }
 

@@ -16,7 +16,10 @@ extension CollectionView: UICollectionViewDelegateFlowLayout {
         let size: CGSize;
 
         let bounds = collectionView.bounds;
-        let width: CGFloat = (bounds.width-(10*3*1.5))/3;
+        let minSpacingForLine: CGFloat = 10;
+        let numberOfCells: CGFloat = 3;
+        let constant: CGFloat = 1.5;
+        let width: CGFloat = (bounds.width-(minSpacingForLine*numberOfCells*constant))/numberOfCells;
         size = CGSize(width: width, height: collectionView.bounds.height);
         
         return size;

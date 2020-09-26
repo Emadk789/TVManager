@@ -71,7 +71,8 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
         1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        favoritResponse?.results.count ?? 5;
+//        favoritResponse?.results.count ?? 5;
+        5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

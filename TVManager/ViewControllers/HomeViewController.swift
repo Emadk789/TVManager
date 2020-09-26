@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var VerticalCollectionView: UICollectionView!
     lazy var verticalCollectionViewController = VerticalCollectionViewController();
+//    var searchViewController: SearchViewController!;
     
     @IBOutlet weak var searchButton: UIButton!
     
@@ -30,6 +31,7 @@ class HomeViewController: UIViewController {
 
         VerticalCollectionView.delegate = verticalCollectionViewController;
         VerticalCollectionView.dataSource = verticalCollectionViewController;
+        
 //        custom?.reloadeCollectionView();
 //        print(custom);
 //        vViewController.
@@ -46,7 +48,10 @@ class HomeViewController: UIViewController {
         searchButton.isHidden = !searchButton.isHidden;
         let searchViewController = storyboard?.instantiateViewController(identifier: "SearchViewController") as! SearchViewController
 //        show(searchViewController, sender: self);
-        present(searchViewController, animated: true, completion: nil);
+        searchViewController.searchButtonDelegate = self;
+        present(searchViewController, animated: true) {
+//            self.searchButton.isHidden = false;
+        }
     }
     
     func handelGetPopularTVShowsResponse(response: GetPopularResponse?, imageType: HorizantalCollectionViewDataSource.HorizantalCollectionViewType, error: Error?) {
@@ -116,4 +121,15 @@ class HomeViewController: UIViewController {
         VerticalCollectionView.reloadData();
     }
 
+}
+extension HomeViewController: SearchButton {
+    func toggelSearchButton() {
+        searchButton.isHidden = !searchButton.isHidden;
+    }
+    
+    
+}
+
+protocol SearchButton {
+    func toggelSearchButton();
 }

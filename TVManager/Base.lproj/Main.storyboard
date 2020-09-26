@@ -622,7 +622,7 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqb-D1-Xg9">
-                                <rect key="frame" x="8" y="45" width="41.5" height="21"/>
+                                <rect key="frame" x="167" y="45" width="41.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -632,11 +632,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="FAf-7T-EfP" firstAttribute="leading" secondItem="g2t-Ha-XEo" secondAttribute="leading" id="7Pg-zB-TeR"/>
-                            <constraint firstItem="eqb-D1-Xg9" firstAttribute="leading" secondItem="g2t-Ha-XEo" secondAttribute="leading" constant="8" id="GNQ-AA-TBA"/>
                             <constraint firstItem="g2t-Ha-XEo" firstAttribute="bottom" secondItem="FAf-7T-EfP" secondAttribute="bottom" id="Nc1-Qb-9X9"/>
-                            <constraint firstItem="g2t-Ha-XEo" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eqb-D1-Xg9" secondAttribute="trailing" constant="30" id="UzI-DQ-dgd"/>
                             <constraint firstItem="FAf-7T-EfP" firstAttribute="top" secondItem="g2t-Ha-XEo" secondAttribute="top" constant="30" id="hPO-gv-trP"/>
                             <constraint firstItem="eqb-D1-Xg9" firstAttribute="top" secondItem="g2t-Ha-XEo" secondAttribute="top" constant="1" id="hkn-2P-PI9"/>
+                            <constraint firstItem="eqb-D1-Xg9" firstAttribute="centerX" secondItem="nkj-aY-F1m" secondAttribute="centerX" id="oRJ-qR-5xP"/>
                             <constraint firstItem="g2t-Ha-XEo" firstAttribute="trailing" secondItem="FAf-7T-EfP" secondAttribute="trailing" id="uCh-gL-stQ"/>
                             <constraint firstItem="FAf-7T-EfP" firstAttribute="top" secondItem="eqb-D1-Xg9" secondAttribute="bottom" constant="8" symbolic="YES" id="v4b-cA-t3J"/>
                         </constraints>
