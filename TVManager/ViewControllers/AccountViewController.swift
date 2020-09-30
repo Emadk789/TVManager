@@ -15,10 +15,19 @@ class AccountViewController: UIViewController {
     
     var account: GetDetailsResponse!;
     var createdLists: GetCreatedListsResponse!;
-    var favoritResponse: GetPopularResponse? = nil {
+    var favoritResponse: GetPopularResponse? = nil;
+//    var favoritResponse: GetPopularResponse? = nil {
+//        didSet {
+//            collectionView.reloadData();
+//        }
+//    }
+    var data: [UIImage?] = [] {
         didSet {
             collectionView.reloadData();
         }
+    }
+    enum DownloadType {
+        case favorit;
     }
     
     override func viewDidLoad() {
@@ -59,8 +68,23 @@ class AccountViewController: UIViewController {
         TVClient.shared.getDecodableRequest(url: url, imageType: .movie(image: nil), response: GetPopularResponse.self) { (response, type, error) in
 //            response?.results[0].
             self.favoritResponse = response;
+            self.downloadeImages(of: .favorit);
+            
             //TODO: set up the collection view based on the response returned!
             //
+        }
+    }
+    private func downloadeImages(of type: DownloadType) {
+//        var images: [UIImage?] = [];
+        switch type {
+        case .favorit:
+            for response in favoritResponse?.results ?? [] {
+                TVClient.shared.downloadeImages(path: response.posterPath!, imageType: .movie(image: nil)) { (image, error, type) in
+                    self.data.append(image);
+//                    self.collectionView.reloadData();
+                }
+            }
+            
         }
     }
 
@@ -79,6 +103,11 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AccountViewControllerCell;
         cell.backgroundColor = .systemTeal;
+//        cell.favoritResponse = self.favoritResponse;
+        guard data != [] else { return cell }
+        cell.data = data;
+//        cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
+//        cell.data = data;
 //        switch indexPath.section {
 //        case 0:
 //            cell.backgroundColor = .systemPink;

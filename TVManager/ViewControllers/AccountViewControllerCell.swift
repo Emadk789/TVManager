@@ -14,6 +14,20 @@ class AccountViewControllerCell: UICollectionViewCell {
     
     lazy var accountHorizantalCollectionViewController: AccountHorizantalCollectionViewController = AccountHorizantalCollectionViewController();
     
+//    var favoritResponse: GetPopularResponse? = nil {
+//        didSet {
+//            accountHorizantalCollectionViewController.favoritResponse = favoritResponse;
+//            accountHorizantalCollectionView.reloadData();
+//        }
+//    }
+    var data: [UIImage?] = [] {
+        didSet {
+            accountHorizantalCollectionViewController.data = data;
+            accountHorizantalCollectionView.reloadData();
+        }
+    }
+
+    
     override func layoutSubviews() {
         accountHorizantalCollectionView.delegate = accountHorizantalCollectionViewController;
         accountHorizantalCollectionView.dataSource = accountHorizantalCollectionViewController;
