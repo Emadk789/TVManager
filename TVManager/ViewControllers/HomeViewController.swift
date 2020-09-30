@@ -12,12 +12,8 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var VerticalCollectionView: UICollectionView!
     lazy var verticalCollectionViewController = VerticalCollectionViewController();
-//    var searchViewController: SearchViewController!;
     
     @IBOutlet weak var searchButton: UIButton!
-    
-//    let verticalCollectionViewCell = VerticalCollectionViewCell();
-//    var custom: customHorizantalCollectionViewDelegate?;
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -26,32 +22,19 @@ class HomeViewController: UIViewController {
         TVClient.shared.getDecodableRequest(url: TVURL, imageType: .tv(image: nil), response: GetPopularResponse.self, completion: self.handelGetPopularTVShowsResponse(response:imageType:error:))
         let MovieURL = TVClient.EndPoints.getPopular(.movie).stringURL;
         TVClient.shared.getDecodableRequest(url: MovieURL, imageType: .movie(image: nil), response: GetPopularResponse.self, completion: self.handelGetPopularTVShowsResponse(response:imageType:error:))
-        
-//        TVClient.shared.getPopularTVShows(completion: self.handelGetPopularTVShowsResponse(response:error:));
 
         VerticalCollectionView.delegate = verticalCollectionViewController;
         VerticalCollectionView.dataSource = verticalCollectionViewController;
         
-//        custom?.reloadeCollectionView();
-//        print(custom);
-//        vViewController.
-//        verticalCollectionViewCell.
-        // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
-        searchButton.isHidden = false;
-//        custom?.reloadeCollectionView();
-//        print(custom);
     }
     @IBAction func searchButtonClicked(_ sender: Any) {
         searchButton.isHidden = !searchButton.isHidden;
         let searchViewController = storyboard?.instantiateViewController(identifier: "SearchViewController") as! SearchViewController
-//        show(searchViewController, sender: self);
         searchViewController.searchButtonDelegate = self;
-        present(searchViewController, animated: true) {
-//            self.searchButton.isHidden = false;
-        }
+        present(searchViewController, animated: true);
     }
     
     func handelGetPopularTVShowsResponse(response: GetPopularResponse?, imageType: HorizantalCollectionViewDataSource.HorizantalCollectionViewType, error: Error?) {
@@ -63,7 +46,6 @@ class HomeViewController: UIViewController {
 
             let tempArray: [UIImage?] = [];
             HorizantalCollectionViewDataSource.data.append(tempArray);
-//            HorizantalCollectionViewDataSource.data.append(tempArray);
             
             for result in response.results {
                 let x = HorizantalCollectionViewDataSource.data.endIndex;
