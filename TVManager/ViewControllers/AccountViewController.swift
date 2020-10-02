@@ -79,7 +79,7 @@ class AccountViewController: UIViewController {
         switch type {
         case .favorit:
             for response in favoritResponse?.results ?? [] {
-                TVClient.shared.downloadeImages(path: response.posterPath!, imageType: .movie(image: nil)) { (image, error, type) in
+                TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error, type) in
                     self.data.append(image);
 //                    self.collectionView.reloadData();
                 }

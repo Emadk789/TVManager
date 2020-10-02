@@ -234,7 +234,7 @@ class TVClient {
 //
 //    }
     
-    func downloadeImages(path: String, imageType: type, completion: @escaping (UIImage?, Error?, type) -> Void) {
+    func downloadeImages(path: String, imageType: type = .movie(image: nil), completion: @escaping (UIImage?, Error?, type) -> Void) {
         let url = TVClient.ImageEndPoints.getOriginalImage(path: path).stringValue;
         AF.request(url).response { (response) in
             guard let data = response.data else { return }
