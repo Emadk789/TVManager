@@ -190,7 +190,7 @@ class TVClient {
         
     }
     
-    func getDecodableRequest<Response: Decodable>(url: URL, imageType: type, response: Response.Type,completion: @escaping ((Response?, type, Error?) -> Void)) {
+    func getDecodableRequest<Response: Decodable>(url: URL, imageType: type = .movie(image: nil), response: Response.Type,completion: @escaping ((Response?, type, Error?) -> Void)) {
         
         AF.request(url).responseDecodable(of: response, decoder: TVClient.decoder) { (response) in
             debugPrint(response);

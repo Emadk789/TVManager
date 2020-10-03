@@ -478,7 +478,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qif-jc-Bhz">
-                                                    <rect key="frame" x="8" y="8" width="359" height="141"/>
+                                                    <rect key="frame" x="8" y="39" width="359" height="110"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="osM-aB-x5u">
                                                         <size key="itemSize" width="128" height="128"/>
@@ -488,7 +488,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="Slf-2r-W8J" customClass="AccountHorizantalCollectionViewCell" customModule="TVManager" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="6.5" width="128" height="128"/>
+                                                            <rect key="frame" x="0.0" y="-9" width="128" height="128"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9in-GA-2wr">
                                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -511,17 +511,31 @@
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VKn-cf-oPY">
+                                                    <rect key="frame" x="256" y="4" width="111" height="32"/>
+                                                    <segments>
+                                                        <segment title="TV"/>
+                                                        <segment title="Movie"/>
+                                                    </segments>
+                                                    <connections>
+                                                        <action selector="segmentViewClicked:" destination="lnh-NA-9Lw" eventType="valueChanged" id="zVo-tB-ipr"/>
+                                                    </connections>
+                                                </segmentedControl>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="VKn-cf-oPY" secondAttribute="trailing" constant="8" id="0On-yj-Fpp"/>
                                                 <constraint firstItem="qif-jc-Bhz" firstAttribute="leading" secondItem="OaQ-YQ-95e" secondAttribute="leading" constant="8" id="44j-z0-M57"/>
-                                                <constraint firstItem="qif-jc-Bhz" firstAttribute="top" secondItem="OaQ-YQ-95e" secondAttribute="top" constant="8" id="49q-OG-fRQ"/>
+                                                <constraint firstItem="VKn-cf-oPY" firstAttribute="top" secondItem="OaQ-YQ-95e" secondAttribute="top" constant="4" id="8ey-MF-1T5"/>
                                                 <constraint firstAttribute="bottom" secondItem="qif-jc-Bhz" secondAttribute="bottom" constant="8" id="DCN-DX-d2Q"/>
+                                                <constraint firstItem="qif-jc-Bhz" firstAttribute="top" secondItem="VKn-cf-oPY" secondAttribute="bottom" constant="4" id="WKx-qI-XPo"/>
                                                 <constraint firstAttribute="trailing" secondItem="qif-jc-Bhz" secondAttribute="trailing" constant="8" id="eG9-Ce-xjd"/>
+                                                <constraint firstItem="VKn-cf-oPY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OaQ-YQ-95e" secondAttribute="leading" constant="20" symbolic="YES" id="sNX-Ce-U9M"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="375" height="157"/>
                                         <connections>
                                             <outlet property="accountHorizantalCollectionView" destination="qif-jc-Bhz" id="x75-M3-QyE"/>
+                                            <outlet property="segmentView" destination="VKn-cf-oPY" id="C0u-L4-yMf"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

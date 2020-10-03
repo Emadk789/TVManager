@@ -12,6 +12,9 @@ class AccountViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var segmentView: UISegmentedControl!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    
     
     var account: GetDetailsResponse!;
     var createdLists: GetCreatedListsResponse!;
@@ -37,6 +40,10 @@ class AccountViewController: UIViewController {
         getAccout();
         
     }
+    @IBAction func segmentViewClicked(_ sender: Any) {
+//        let index = segmentView.selectedSegmentIndex;
+        let x = (sender as! UISegmentedControl).selectedSegmentIndex;
+    }
     
     private func getAccout() {
         let url = TVClient.EndPoints.account.stringURL;
@@ -57,7 +64,7 @@ class AccountViewController: UIViewController {
     }
     private func getCreatedLists() {
         let url = TVClient.EndPoints.getCreatedLists(accountID: "\(account.id)").stringURL;
-        TVClient.shared.getDecodableRequest(url: url, imageType: .movie(image: nil), response: GetCreatedListsResponse.self) { (response, type, error) in
+        TVClient.shared.getDecodableRequest(url: url, response: GetCreatedListsResponse.self) { (response, type, error) in
             // TODO: Handel error and check the response!
             self.createdLists = response;
         }
@@ -65,7 +72,7 @@ class AccountViewController: UIViewController {
     private func getFavorit(kind: TVClient.EndPoints.Kind) {
         let url = TVClient.EndPoints.getFavorite(kind).stringURL;
         
-        TVClient.shared.getDecodableRequest(url: url, imageType: .movie(image: nil), response: GetPopularResponse.self) { (response, type, error) in
+        TVClient.shared.getDecodableRequest(url: url, response: GetPopularResponse.self) { (response, type, error) in
 //            response?.results[0].
             self.favoritResponse = response;
             self.downloadeImages(of: .favorit);
@@ -79,7 +86,7 @@ class AccountViewController: UIViewController {
         switch type {
         case .favorit:
             for response in favoritResponse?.results ?? [] {
-                TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error, type) in
+                TVClient.shared.downloadeImages(path: response.posterPath!, imageType: .movie(image: nil)) { (image, error, type) in
                     self.data.append(image);
 //                    self.collectionView.reloadData();
                 }
@@ -104,8 +111,10 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
         var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AccountViewControllerCell;
         cell.backgroundColor = .systemTeal;
 //        cell.favoritResponse = self.favoritResponse;
+        cell.cellNumber = indexPath.item;
         guard data != [] else { return cell }
         cell.data = data;
+        
 //        cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
 //        cell.data = data;
 //        switch indexPath.section {
