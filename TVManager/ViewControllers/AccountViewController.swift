@@ -13,7 +13,7 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var segmentView: UISegmentedControl!
-    @IBOutlet weak var segmentControl: UISegmentedControl!
+//    @IBOutlet weak var segmentControl: UISegmentedControl!
     
     
     var account: GetDetailsResponse!;
@@ -41,8 +41,8 @@ class AccountViewController: UIViewController {
         
     }
     @IBAction func segmentViewClicked(_ sender: Any) {
-//        let index = segmentView.selectedSegmentIndex;
-        let x = (sender as! UISegmentedControl).selectedSegmentIndex;
+        let index = segmentView.selectedSegmentIndex;
+//        let x = (sender as! UISegmentedControl).selectedSegmentIndex;
     }
     
     private func getAccout() {
@@ -114,7 +114,7 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.cellNumber = indexPath.item;
         guard data != [] else { return cell }
         cell.data = data;
-        
+        cell.accountHorizantalCollectionViewLabel.text = "Favorit";
 //        cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
 //        cell.data = data;
 //        switch indexPath.section {

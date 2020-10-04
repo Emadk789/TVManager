@@ -461,7 +461,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FAf-7T-EfP">
-                                <rect key="frame" x="0.0" y="74" width="375" height="544"/>
+                                <rect key="frame" x="0.0" y="79" width="375" height="539"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="674-Ws-BT2">
                                     <size key="itemSize" width="375" height="157"/>
@@ -478,7 +478,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qif-jc-Bhz">
-                                                    <rect key="frame" x="8" y="39" width="359" height="110"/>
+                                                    <rect key="frame" x="8" y="27" width="359" height="122"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="osM-aB-x5u">
                                                         <size key="itemSize" width="128" height="128"/>
@@ -488,7 +488,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="Slf-2r-W8J" customClass="AccountHorizantalCollectionViewCell" customModule="TVManager" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="-9" width="128" height="128"/>
+                                                            <rect key="frame" x="0.0" y="-3" width="128" height="128"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9in-GA-2wr">
                                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -511,48 +511,61 @@
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VKn-cf-oPY">
-                                                    <rect key="frame" x="256" y="4" width="111" height="32"/>
-                                                    <segments>
-                                                        <segment title="TV"/>
-                                                        <segment title="Movie"/>
-                                                    </segments>
-                                                    <connections>
-                                                        <action selector="segmentViewClicked:" destination="lnh-NA-9Lw" eventType="valueChanged" id="zVo-tB-ipr"/>
-                                                    </connections>
-                                                </segmentedControl>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="940-zt-KA4">
+                                                    <rect key="frame" x="16" y="0.0" width="52" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="26N-Oo-o1R"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="VKn-cf-oPY" secondAttribute="trailing" constant="8" id="0On-yj-Fpp"/>
                                                 <constraint firstItem="qif-jc-Bhz" firstAttribute="leading" secondItem="OaQ-YQ-95e" secondAttribute="leading" constant="8" id="44j-z0-M57"/>
-                                                <constraint firstItem="VKn-cf-oPY" firstAttribute="top" secondItem="OaQ-YQ-95e" secondAttribute="top" constant="4" id="8ey-MF-1T5"/>
+                                                <constraint firstItem="940-zt-KA4" firstAttribute="leading" secondItem="OaQ-YQ-95e" secondAttribute="leading" constant="16" id="5h7-Sa-PVe"/>
                                                 <constraint firstAttribute="bottom" secondItem="qif-jc-Bhz" secondAttribute="bottom" constant="8" id="DCN-DX-d2Q"/>
-                                                <constraint firstItem="qif-jc-Bhz" firstAttribute="top" secondItem="VKn-cf-oPY" secondAttribute="bottom" constant="4" id="WKx-qI-XPo"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="940-zt-KA4" secondAttribute="trailing" constant="307" id="H44-2q-1zo"/>
+                                                <constraint firstItem="qif-jc-Bhz" firstAttribute="top" secondItem="940-zt-KA4" secondAttribute="bottom" constant="2" id="d5K-Op-JR9"/>
                                                 <constraint firstAttribute="trailing" secondItem="qif-jc-Bhz" secondAttribute="trailing" constant="8" id="eG9-Ce-xjd"/>
-                                                <constraint firstItem="VKn-cf-oPY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OaQ-YQ-95e" secondAttribute="leading" constant="20" symbolic="YES" id="sNX-Ce-U9M"/>
+                                                <constraint firstItem="940-zt-KA4" firstAttribute="top" secondItem="OaQ-YQ-95e" secondAttribute="top" id="wuK-O6-jki"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="375" height="157"/>
                                         <connections>
                                             <outlet property="accountHorizantalCollectionView" destination="qif-jc-Bhz" id="x75-M3-QyE"/>
-                                            <outlet property="segmentView" destination="VKn-cf-oPY" id="C0u-L4-yMf"/>
+                                            <outlet property="accountHorizantalCollectionViewLabel" destination="940-zt-KA4" id="Li6-d4-8OR"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqb-D1-Xg9">
-                                <rect key="frame" x="167" y="45" width="41.5" height="21"/>
+                                <rect key="frame" x="167" y="45" width="41.5" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VKn-cf-oPY">
+                                <rect key="frame" x="256" y="46" width="111" height="32"/>
+                                <segments>
+                                    <segment title="TV"/>
+                                    <segment title="Movie"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentViewClicked:" destination="Pap-3a-wg2" eventType="valueChanged" id="wOU-TF-sfW"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="g2t-Ha-XEo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="FAf-7T-EfP" firstAttribute="top" secondItem="VKn-cf-oPY" secondAttribute="bottom" constant="2" id="4Gg-x5-G6N"/>
                             <constraint firstItem="FAf-7T-EfP" firstAttribute="leading" secondItem="g2t-Ha-XEo" secondAttribute="leading" id="7Pg-zB-TeR"/>
                             <constraint firstItem="g2t-Ha-XEo" firstAttribute="bottom" secondItem="FAf-7T-EfP" secondAttribute="bottom" id="Nc1-Qb-9X9"/>
-                            <constraint firstItem="FAf-7T-EfP" firstAttribute="top" secondItem="g2t-Ha-XEo" secondAttribute="top" constant="30" id="hPO-gv-trP"/>
+                            <constraint firstItem="VKn-cf-oPY" firstAttribute="top" secondItem="g2t-Ha-XEo" secondAttribute="top" constant="2" id="Nn6-F0-40g"/>
+                            <constraint firstItem="VKn-cf-oPY" firstAttribute="leading" relation="lessThanOrEqual" secondItem="eqb-D1-Xg9" secondAttribute="trailing" constant="47.5" id="clF-wT-Muf"/>
+                            <constraint firstItem="g2t-Ha-XEo" firstAttribute="trailing" secondItem="VKn-cf-oPY" secondAttribute="trailing" constant="8" id="gVC-OT-Xax"/>
+                            <constraint firstItem="FAf-7T-EfP" firstAttribute="top" secondItem="g2t-Ha-XEo" secondAttribute="top" constant="35" id="hPO-gv-trP"/>
                             <constraint firstItem="eqb-D1-Xg9" firstAttribute="top" secondItem="g2t-Ha-XEo" secondAttribute="top" constant="1" id="hkn-2P-PI9"/>
                             <constraint firstItem="eqb-D1-Xg9" firstAttribute="centerX" secondItem="nkj-aY-F1m" secondAttribute="centerX" id="oRJ-qR-5xP"/>
                             <constraint firstItem="g2t-Ha-XEo" firstAttribute="trailing" secondItem="FAf-7T-EfP" secondAttribute="trailing" id="uCh-gL-stQ"/>
@@ -562,6 +575,7 @@
                     <navigationItem key="navigationItem" id="7y1-rg-9Dn"/>
                     <connections>
                         <outlet property="collectionView" destination="FAf-7T-EfP" id="WAG-bP-Q2j"/>
+                        <outlet property="segmentView" destination="VKn-cf-oPY" id="IHh-Vd-FWS"/>
                         <outlet property="userNameLabel" destination="eqb-D1-Xg9" id="Oll-e1-iDQ"/>
                     </connections>
                 </viewController>

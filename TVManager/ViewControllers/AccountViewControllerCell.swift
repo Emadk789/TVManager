@@ -11,7 +11,8 @@ import UIKit
 class AccountViewControllerCell: UICollectionViewCell {
 //    @IBOutlet weak var accountHorizantalCollectionView: UICollectionView!
     @IBOutlet weak var accountHorizantalCollectionView: UICollectionView!
-    @IBOutlet weak var segmentView: UISegmentedControl!
+//    @IBOutlet weak var segmentView: UISegmentedControl!
+    @IBOutlet weak var accountHorizantalCollectionViewLabel: UILabel!
     
     lazy var accountHorizantalCollectionViewController: AccountHorizantalCollectionViewController = AccountHorizantalCollectionViewController();
     var cellNumber = Int()
@@ -28,16 +29,16 @@ class AccountViewControllerCell: UICollectionViewCell {
             accountHorizantalCollectionView.reloadData();
         }
     }
-    @IBAction func segmentViewClicked(_ sender: Any) {
-        let index = segmentView.selectedSegmentIndex;
-        let cell = cellNumber;
-    }
+//    @IBAction func segmentViewClicked(_ sender: Any) {
+//        let index = segmentView.selectedSegmentIndex;
+//        let cell = cellNumber;
+//    }
     
-    override func prepareForReuse() {
-        segmentView.setEnabled(true, forSegmentAt: 0)
-        segmentView.selectedSegmentIndex = 0;
-//        let x = segmentView.isSelected;
-    }
+//    override func prepareForReuse() {
+//        segmentView.setEnabled(true, forSegmentAt: 0)
+//        segmentView.selectedSegmentIndex = 0;
+////        let x = segmentView.isSelected;
+//    }
     override func layoutSubviews() {
         accountHorizantalCollectionView.delegate = accountHorizantalCollectionViewController;
         accountHorizantalCollectionView.dataSource = accountHorizantalCollectionViewController;
