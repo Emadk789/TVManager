@@ -15,6 +15,8 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var searchButton: UIButton!
     
+//    var accountViewControllerDelegate: AccountViewControllerDelegate!;
+    
     override func viewDidLoad() {
         super.viewDidLoad();
         // TODO: Add an escaping closure to know when the finishes and then start downloading the images and reloade the vViewController
@@ -25,6 +27,8 @@ class HomeViewController: UIViewController {
 
         VerticalCollectionView.delegate = verticalCollectionViewController;
         VerticalCollectionView.dataSource = verticalCollectionViewController;
+        
+//        accountViewControllerDelegate.getAccount();
         
     }
     override func viewWillAppear(_ animated: Bool) {

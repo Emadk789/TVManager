@@ -69,6 +69,7 @@ class TVClient {
         case account;
         case getCreatedLists(accountID: String);
         case getFavorite(Kind);
+        case getWatchlist(Kind)
         
         case getPopular(Kind);
         enum Kind {
@@ -105,6 +106,14 @@ class TVClient {
                     return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/favorite/movies\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
                 case .movie:
                     return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/favorite/movies\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
+                    
+                }
+            case .getWatchlist(let kind):
+                switch kind {
+                case .tv:
+                    return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/whatchlist/movies\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
+                case .movie:
+                    return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/whatchlist/movies\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
                     
                 }
             }

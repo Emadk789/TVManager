@@ -6,9 +6,15 @@
 //  Copyright © 2020 Emad Albarnawi. All rights reserved.
 //
 
-import UIKit
+import UIKit;
+
+//protocol AccountViewControllerDelegate {
+//    func getAccount();
+//}
 
 class AccountViewController: UIViewController {
+    
+    
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var userNameLabel: UILabel!
@@ -19,6 +25,7 @@ class AccountViewController: UIViewController {
     var account: GetDetailsResponse!;
     var createdLists: GetCreatedListsResponse!;
     var favoritResponse: GetPopularResponse? = nil;
+    var watchlistResponse: GetPopularResponse? = nil;
 //    var favoritResponse: GetPopularResponse? = nil {
 //        didSet {
 //            collectionView.reloadData();
@@ -30,29 +37,44 @@ class AccountViewController: UIViewController {
         }
     }
     enum DownloadType {
-        case favorit;
+        case favorit, whatchlist;
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self;
         collectionView.dataSource = self;
-        getAccout();
+        // TODO: Implement delegate between Home and Account VC's
+        // All initial request should start form Home VC!!!
+        getAccount();
         
     }
     @IBAction func segmentViewClicked(_ sender: Any) {
         let index = segmentView.selectedSegmentIndex;
 //        let x = (sender as! UISegmentedControl).selectedSegmentIndex;
     }
-    
-    private func getAccout() {
+//    func getAccount() {
+//        let url = TVClient.EndPoints.account.stringURL;
+//        TVClient.shared.getDecodableRequest(url: url, response: GetDetailsResponse.self) { (response, type, error) in
+//
+//            // TODO: Handel error and check the response!
+//            self.account = response;
+//            TVClient.Auth.setAccountID(id: "\(self.account.id)");
+//            self.getFavorit(kind: .movie);
+//            self.getCreatedLists();
+//            self.updateUI();
+//
+//        }
+//    }
+    func getAccount() {
         let url = TVClient.EndPoints.account.stringURL;
-        TVClient.shared.getDecodableRequest(url: url, imageType: .movie(image: nil), response: GetDetailsResponse.self) { (response, type, error) in
+        TVClient.shared.getDecodableRequest(url: url, response: GetDetailsResponse.self) { (response, type, error) in
             
             // TODO: Handel error and check the response!
             self.account = response;
             TVClient.Auth.setAccountID(id: "\(self.account.id)");
             self.getFavorit(kind: .movie);
+            self.getWatchlist(kind: .movie)
             self.getCreatedLists();
             self.updateUI();
             
@@ -81,12 +103,31 @@ class AccountViewController: UIViewController {
             //
         }
     }
+    private func getWatchlist(kind: TVClient.EndPoints.Kind) {
+        let url = TVClient.EndPoints.getWatchlist(kind).stringURL;
+        
+        TVClient.shared.getDecodableRequest(url: url, response: GetPopularResponse.self) { (response, type, error) in
+//            response?.results[0].
+            self.watchlistResponse = response;
+            self.downloadeImages(of: .whatchlist);
+            
+            //TODO: set up the collection view based on the response returned!
+            //
+        }
+    }
     private func downloadeImages(of type: DownloadType) {
 //        var images: [UIImage?] = [];
         switch type {
         case .favorit:
             for response in favoritResponse?.results ?? [] {
-                TVClient.shared.downloadeImages(path: response.posterPath!, imageType: .movie(image: nil)) { (image, error, type) in
+                TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error, type) in
+                    self.data.append(image);
+//                    self.collectionView.reloadData();
+                }
+            }
+        case .whatchlist:
+            for response in watchlistResponse?.results ?? [] {
+                TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error, type) in
                     self.data.append(image);
 //                    self.collectionView.reloadData();
                 }
