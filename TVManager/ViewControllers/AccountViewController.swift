@@ -31,6 +31,11 @@ class AccountViewController: UIViewController {
 //            collectionView.reloadData();
 //        }
 //    }
+    var data2: [[UIImage?]] = [] {
+        didSet {
+            collectionView.reloadData();
+        }
+    }
     var data: [UIImage?] = [] {
         didSet {
             collectionView.reloadData();
@@ -119,16 +124,21 @@ class AccountViewController: UIViewController {
 //        var images: [UIImage?] = [];
         switch type {
         case .favorit:
+            self.data2.append([nil]);
             for response in favoritResponse?.results ?? [] {
                 TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error, type) in
-                    self.data.append(image);
+                    self.data2[0].append(image);
+//                    self.data.append(image);
 //                    self.collectionView.reloadData();
                 }
             }
         case .whatchlist:
+            self.data2.append([nil]);
             for response in watchlistResponse?.results ?? [] {
+//                self.data2[1] = [];
                 TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error, type) in
-                    self.data.append(image);
+                    self.data2[1].append(image);
+//                    self.data.append(image);
 //                    self.collectionView.reloadData();
                 }
             }
@@ -140,11 +150,13 @@ class AccountViewController: UIViewController {
 
 extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
+        data2.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        favoritResponse?.results.count ?? 5;
-        5
+//        5
+//        data2[section].count;
+        1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -152,10 +164,19 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
         var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AccountViewControllerCell;
         cell.backgroundColor = .systemTeal;
 //        cell.favoritResponse = self.favoritResponse;
-        cell.cellNumber = indexPath.item;
-        guard data != [] else { return cell }
-        cell.data = data;
-        cell.accountHorizantalCollectionViewLabel.text = "Favorit";
+        cell.cellNumber = indexPath.item; //???
+        cell.data = data2[indexPath.section];
+        
+        switch indexPath.section {
+        case 0:
+            cell.accountHorizantalCollectionViewLabel.text = "Favorit";
+        default:
+            cell.accountHorizantalCollectionViewLabel.text = "Watchlist";
+        }
+        
+//        guard data != [] else { return cell }
+//        cell.data = data;
+//        cell.accountHorizantalCollectionViewLabel.text = "Favorit";
 //        cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
 //        cell.data = data;
 //        switch indexPath.section {
