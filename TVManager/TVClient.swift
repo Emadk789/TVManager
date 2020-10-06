@@ -103,7 +103,7 @@ class TVClient {
             case .getFavorite(let kind):
                 switch kind {
                 case .tv:
-                    return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/favorite/movies\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
+                    return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/favorite/tv\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
                 case .movie:
                     return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/favorite/movies\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
                     
@@ -111,7 +111,7 @@ class TVClient {
             case .getWatchlist(let kind):
                 switch kind {
                 case .tv:
-                    return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/watchlist/movies\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
+                    return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/watchlist/tv\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
                 case .movie:
                     return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/watchlist/movies\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
                     

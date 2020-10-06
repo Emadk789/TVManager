@@ -56,6 +56,18 @@ class AccountViewController: UIViewController {
     }
     @IBAction func segmentViewClicked(_ sender: Any) {
         let index = segmentView.selectedSegmentIndex;
+        switch index {
+        case 0:
+            data2 = [];
+            self.getFavorit(kind: .tv);
+            self.getWatchlist(kind: .tv);
+        case 1:
+            data2 = [];
+            self.getFavorit(kind: .movie);
+            self.getWatchlist(kind: .movie);
+        default:
+            break
+        }
 //        let x = (sender as! UISegmentedControl).selectedSegmentIndex;
     }
 //    func getAccount() {
@@ -78,8 +90,8 @@ class AccountViewController: UIViewController {
             // TODO: Handel error and check the response!
             self.account = response;
             TVClient.Auth.setAccountID(id: "\(self.account.id)");
-            self.getFavorit(kind: .movie);
-            self.getWatchlist(kind: .movie)
+            self.getFavorit(kind: .tv);
+            self.getWatchlist(kind: .tv)
             self.getCreatedLists();
             self.updateUI();
             
@@ -124,7 +136,7 @@ class AccountViewController: UIViewController {
 //        var images: [UIImage?] = [];
         switch type {
         case .favorit:
-            self.data2.append([nil]);
+            self.data2.append([]);
             for response in favoritResponse?.results ?? [] {
                 TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error, type) in
                     self.data2[0].append(image);
@@ -133,7 +145,8 @@ class AccountViewController: UIViewController {
                 }
             }
         case .whatchlist:
-            self.data2.append([nil]);
+//            self.data2.append([nil]);
+            self.data2.append([]);
             for response in watchlistResponse?.results ?? [] {
 //                self.data2[1] = [];
                 TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error, type) in
