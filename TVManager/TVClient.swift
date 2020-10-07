@@ -66,6 +66,8 @@ class TVClient {
         case searchKeyWords(query: String);
         case searchMovie(query: String);
         
+        case multiSearch(query: String);
+        
         case account;
         case getCreatedLists(accountID: String);
         case getFavorite(Kind);
@@ -96,6 +98,8 @@ class TVClient {
                 return URL(string: "\(TVClient.baseURL)search/keyword\(TVClient.Auth.APIKey)&query=\(query)")!
             case .searchMovie(let query):
                 return URL(string: "\(TVClient.baseURL)search/movie\(TVClient.Auth.APIKey)&query=\(query)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")!
+            case .multiSearch(let query):
+                return URL(string: "\(TVClient.baseURL)search/multi\(TVClient.Auth.APIKey)&query=\(query)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")!
             case .account:
                 return URL(string: "\(TVClient.baseURL)account\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
             case .getCreatedLists(let accountID):

@@ -79,7 +79,7 @@ extension SearchViewController: UITextFieldDelegate {
         let url = TVClient.EndPoints.searchMovie(query: textField.text!).stringURL;
         print(url);
 
-        TVClient.shared.getDecodableRequest(url: url, imageType: .movie(image: nil), response: GetPopularResponse.self) { (response, type, error) in
+        TVClient.shared.getDecodableRequest(url: url, response: GetPopularResponse.self) { (response, type, error) in
             if error != nil { return }
             for (index, image) in response!.results.enumerated() {
                 guard let posterPath = image.posterPath else { return }
