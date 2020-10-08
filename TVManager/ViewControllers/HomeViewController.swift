@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        // TODO: Add an escaping closure to know when the finishes and then start downloading the images and reloade the vViewController
+        // TODO: make the request comes to different handelers and store the data locally in the HomeVC.
         let TVURL = TVClient.EndPoints.getPopular(.tv).stringURL;
         TVClient.shared.getDecodableRequest(url: TVURL, imageType: .tv(image: nil), response: GetPopularResponse.self, completion: self.handelGetPopularTVShowsResponse(response:imageType:error:))
         let MovieURL = TVClient.EndPoints.getPopular(.movie).stringURL;
@@ -60,42 +60,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-//    func handelGetPopularTVShowsResponse(response: GetPopularMovieResponse?, error: Error?) {
-//            if error != nil { return }
-//            if let response = response {
-//    //            response.
-//                HorizantalCollectionViewDataSource.imagesToLoade = response.results.count;
-//                VerticalCollectionView.reloadData();
-//
-//                let tempArray: [UIImage?] = [];
-//                HorizantalCollectionViewDataSource.data.append(tempArray);
-//    //            HorizantalCollectionViewDataSource.data.append(tempArray);
-//                
-//                for result in response.results {
-//                    let x = HorizantalCollectionViewDataSource.data.endIndex;
-//                    HorizantalCollectionViewDataSource.data[HorizantalCollectionViewDataSource.data.endIndex - 1].append(nil);
-//    //                HorizantalCollectionViewDataSource.data[1].append(nil);
-//                    TVClient.shared.downloadeImages(path: result.posterPath!, imageType: .tv(image: nil), completion: self.handelImageResponse(image:error:imageType:))
-//                }
-//            }
-//        }
-//    func handelGetPopularTVShowsResponse(response: GetPopularResponse?, error: Error?) {
-//        if error != nil { return }
-//        if let response = response {
-//            HorizantalCollectionViewDataSource.imagesToLoade = response.results.count;
-//            VerticalCollectionView.reloadData();
-//
-//            let tempArray: [UIImage?] = [];
-//            HorizantalCollectionViewDataSource.data.append(tempArray);
-//            HorizantalCollectionViewDataSource.data.append(tempArray);
-//            
-//            for result in response.results {
-//                HorizantalCollectionViewDataSource.data[0].append(nil);
-//                HorizantalCollectionViewDataSource.data[1].append(nil);
-//                TVClient.shared.downloadeImages(path: result.posterPath!, imageType: .tv(image: nil), completion: self.handelImageResponse(success:error:))
-//            }
-//        }
-//    }
     func handelImageResponse(image: UIImage?, error: Error?, imageType: HorizantalCollectionViewDataSource.HorizantalCollectionViewType) {
         switch imageType {
         case .tv:
