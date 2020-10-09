@@ -10,10 +10,15 @@ import UIKit
 
 class VerticalCollectionViewController: CollectionView, UICollectionViewDataSource {
     
+    var movieData: [[UIImage?]] = [];
+    var tvData: [[UIImage?]] = [];
+    var data: [[UIImage?]] = [];
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         //
         //        3
-        HorizantalCollectionViewDataSource.data.count;
+//        HorizantalCollectionViewDataSource.data.count;
+        data.count;
+        
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //        4
@@ -42,7 +47,8 @@ class VerticalCollectionViewController: CollectionView, UICollectionViewDataSour
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
 //            cell.backgroundColor = .darkGray;
-            cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
+//            cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
+            cell.data = data[indexPath.section];
             return cell;
         }
         

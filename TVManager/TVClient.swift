@@ -35,6 +35,7 @@ class TVClient {
     enum ImageEndPoints {
         case getImageWith(size: String? = "w500", path: String);
         case getOriginalImage(path: String);
+//        case getw500Image(path: String)
         
         var stringValue: String {
             switch self {
@@ -129,11 +130,11 @@ class TVClient {
         let url = TVClient.EndPoints.auth.stringURL;
         
         AF.request(url, parameters: TVClient.parmas).responseJSON { (response) in
-            print(response);
+//            print(response);
             guard let data = response.data else { return }
             do {
                 let result = try TVClient.decoder.decode(TokenResponse.self, from: data);
-                print(result.requestToken);
+//                print(result.requestToken);
                 TVClient.Auth.token = result.requestToken;
             } catch {
                 fatalError();
@@ -146,7 +147,7 @@ class TVClient {
         let url = URL(string: "https://www.themoviedb.org/authenticate/\(TVClient.Auth.token)?redirect_to=TVManager://");
         if UIApplication.shared.canOpenURL(url!) {
             UIApplication.shared.open(url!, options: [:]) { (success) in
-                print(success);
+//                print(success);
                 if success {
 //                    TVClient.shared.getSessionID();
                 }
@@ -158,7 +159,7 @@ class TVClient {
         TVClient.parmas["username"] = username;
         TVClient.parmas["password"] = password;
         TVClient.parmas["request_token"] = TVClient.Auth.token;
-        print(TVClient.parmas)
+//        print(TVClient.parmas)
 //        = [username: username, password: password, request_token: TVClient.token];
         AF.request(url, method: .post, parameters: TVClient.parmas, encoding: JSONEncoding.default).responseJSON { (resopnse) in
             switch resopnse.result {
@@ -171,7 +172,7 @@ class TVClient {
                 }
                 break;
             case .failure:
-                debugPrint(resopnse)
+//                debugPrint(resopnse)
                 compleation(false, resopnse.error);
                 break;
             }
@@ -194,8 +195,8 @@ class TVClient {
                 TVClient.defaults.set("\(result.sessionId)", forKey: "sessionID");
                 compleation(true, nil);
             } catch {
-                print(error);
-                fatalError();
+//                print(error);
+                fatalError("Error getting session ID");
             }
         }
         
@@ -203,20 +204,35 @@ class TVClient {
         
     }
     
-    func getDecodableRequest<Response: Decodable>(url: URL, imageType: type = .movie(image: nil), response: Response.Type,completion: @escaping ((Response?, type, Error?) -> Void)) {
+    func getDecodableRequest<Response: Decodable>(url: URL, response: Response.Type,completion: @escaping ((Response?, Error?) -> Void)) {
         
         AF.request(url).responseDecodable(of: response, decoder: TVClient.decoder) { (response) in
-            debugPrint(response);
+//            debugPrint(response);
             switch response.result {
             case .success(let result):
-                print(result);
-                completion(result, imageType, nil);
+//                print(result);
+                completion(result, nil);
             case .failure(let error):
                 print(error);
-                completion(nil, imageType, error)
+                completion(nil, error)
             }
         }
     }
+    func getDecodableRequest<Response: Decodable>(url: URL, kind: HomeViewController.Kind, response: Response.Type,completion: @escaping ((Response?, HomeViewController.Kind, Error?) -> Void)) {
+        print(url);
+        AF.request(url).responseDecodable(of: response, decoder: TVClient.decoder) { (response) in
+//            debugPrint(response);
+            switch response.result {
+            case .success(let result):
+//                print(result);
+                completion(result, kind, nil);
+            case .failure(let error):
+                print(error);
+                completion(nil, kind, error)
+            }
+        }
+    }
+    
     
 //    func getPopularTVShows(completion: @escaping ((GetPopularResponse?, Error?) -> Void)){
 //        let url = TVClient.EndPoints.getPopular(.tv).stringURL;
@@ -246,16 +262,27 @@ class TVClient {
 //
 //
 //    }
-    
-    func downloadeImages(path: String, imageType: type = .movie(image: nil), completion: @escaping (UIImage?, Error?, type) -> Void) {
-        let url = TVClient.ImageEndPoints.getOriginalImage(path: path).stringValue;
+    func downloadeHomeImages(path: String, Kind: HomeViewController.Kind, completion: @escaping (UIImage?, Error?, HomeViewController.Kind) -> Void) {
+        print(path);
+        let url = TVClient.ImageEndPoints.getImageWith(path: path).stringValue;
+        print(url);
+        AF.request(url).response { (response) in
+            guard let data = response.data else { return }
+            let image = UIImage(data: data);
+            DispatchQueue.main.async {
+                completion(image, nil, Kind);
+            }
+        }
+    }
+    func downloadeImages(path: String, completion: @escaping (UIImage?, Error?) -> Void) {
+        let url = TVClient.ImageEndPoints.getImageWith(path: path).stringValue;
         AF.request(url).response { (response) in
             guard let data = response.data else { return }
             let image = UIImage(data: data);
 //            HorizantalCollectionViewDataSource.posterImages.append(image);
 //            HorizantalCollectionViewDataSource.posterImages[HorizantalCollectionViewDataSource.posterImages.firstIndex(of: nil) ?? 0] = image;
             DispatchQueue.main.async {
-                completion(image, nil, imageType);
+                completion(image, nil);
             }
             
 //            switch imageType {
