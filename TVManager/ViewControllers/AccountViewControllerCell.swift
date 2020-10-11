@@ -12,7 +12,7 @@ class AccountViewControllerCell: UICollectionViewCell {
 //    @IBOutlet weak var accountHorizantalCollectionView: UICollectionView!
     @IBOutlet weak var accountHorizantalCollectionView: UICollectionView!
 //    @IBOutlet weak var segmentView: UISegmentedControl!
-    @IBOutlet weak var accountHorizantalCollectionViewLabel: UILabel!
+//    @IBOutlet weak var accountHorizantalCollectionViewLabel: UILabel!
     
     lazy var accountHorizantalCollectionViewController: AccountHorizantalCollectionViewController = AccountHorizantalCollectionViewController();
     var cellNumber = Int()

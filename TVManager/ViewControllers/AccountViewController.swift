@@ -15,6 +15,7 @@ import UIKit;
 class AccountViewController: UIViewController {
     
     
+    //TODO: Sections
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var userNameLabel: UILabel!
@@ -31,12 +32,7 @@ class AccountViewController: UIViewController {
 //            collectionView.reloadData();
 //        }
 //    }
-    var data2: [[UIImage?]] = [] {
-        didSet {
-            collectionView.reloadData();
-        }
-    }
-    var data: [UIImage?] = [] {
+    var data: [[UIImage?]] = [] {
         didSet {
             collectionView.reloadData();
         }
@@ -58,11 +54,11 @@ class AccountViewController: UIViewController {
         let index = segmentView.selectedSegmentIndex;
         switch index {
         case 0:
-            data2 = [];
+            data = [];
             self.getFavorit(kind: .tv);
             self.getWatchlist(kind: .tv);
         case 1:
-            data2 = [];
+            data = [];
             self.getFavorit(kind: .movie);
             self.getWatchlist(kind: .movie);
         default:
@@ -70,22 +66,9 @@ class AccountViewController: UIViewController {
         }
 //        let x = (sender as! UISegmentedControl).selectedSegmentIndex;
     }
-//    func getAccount() {
-//        let url = TVClient.EndPoints.account.stringURL;
-//        TVClient.shared.getDecodableRequest(url: url, response: GetDetailsResponse.self) { (response, type, error) in
-//
-//            // TODO: Handel error and check the response!
-//            self.account = response;
-//            TVClient.Auth.setAccountID(id: "\(self.account.id)");
-//            self.getFavorit(kind: .movie);
-//            self.getCreatedLists();
-//            self.updateUI();
-//
-//        }
-//    }
     func getAccount() {
         let url = TVClient.EndPoints.account.stringURL;
-        TVClient.shared.getDecodableRequest(url: url, response: GetDetailsResponse.self) { (response, type, error) in
+        TVClient.shared.getDecodableRequest(url: url, response: GetDetailsResponse.self) { (response, error) in
             
             // TODO: Handel error and check the response!
             self.account = response;
@@ -103,7 +86,7 @@ class AccountViewController: UIViewController {
     }
     private func getCreatedLists() {
         let url = TVClient.EndPoints.getCreatedLists(accountID: "\(account.id)").stringURL;
-        TVClient.shared.getDecodableRequest(url: url, response: GetCreatedListsResponse.self) { (response, type, error) in
+        TVClient.shared.getDecodableRequest(url: url, response: GetCreatedListsResponse.self) { (response, error) in
             // TODO: Handel error and check the response!
             self.createdLists = response;
         }
@@ -111,7 +94,7 @@ class AccountViewController: UIViewController {
     private func getFavorit(kind: TVClient.EndPoints.Kind) {
         let url = TVClient.EndPoints.getFavorite(kind).stringURL;
         
-        TVClient.shared.getDecodableRequest(url: url, response: GetPopularResponse.self) { (response, type, error) in
+        TVClient.shared.getDecodableRequest(url: url, response: GetPopularResponse.self) { (response, error) in
 //            response?.results[0].
             self.favoritResponse = response;
             self.downloadeImages(of: .favorit);
@@ -123,7 +106,7 @@ class AccountViewController: UIViewController {
     private func getWatchlist(kind: TVClient.EndPoints.Kind) {
         let url = TVClient.EndPoints.getWatchlist(kind).stringURL;
         
-        TVClient.shared.getDecodableRequest(url: url, response: GetPopularResponse.self) { (response, type, error) in
+        TVClient.shared.getDecodableRequest(url: url, response: GetPopularResponse.self) { (response, error) in
 //            response?.results[0].
             self.watchlistResponse = response;
             self.downloadeImages(of: .whatchlist);
@@ -136,21 +119,21 @@ class AccountViewController: UIViewController {
 //        var images: [UIImage?] = [];
         switch type {
         case .favorit:
-            self.data2.append([]);
+            self.data.append([]);
             for response in favoritResponse?.results ?? [] {
-                TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error, type) in
-                    self.data2[0].append(image);
+                TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error) in
+                    self.data[0].append(image);
 //                    self.data.append(image);
 //                    self.collectionView.reloadData();
                 }
             }
         case .whatchlist:
 //            self.data2.append([nil]);
-            self.data2.append([]);
+            self.data.append([]);
             for response in watchlistResponse?.results ?? [] {
 //                self.data2[1] = [];
-                TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error, type) in
-                    self.data2[1].append(image);
+                TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error) in
+                    self.data[1].append(image);
 //                    self.data.append(image);
 //                    self.collectionView.reloadData();
                 }
@@ -163,7 +146,7 @@ class AccountViewController: UIViewController {
 
 extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        data2.count
+        data.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        favoritResponse?.results.count ?? 5;
@@ -178,31 +161,15 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.backgroundColor = .systemTeal;
 //        cell.favoritResponse = self.favoritResponse;
         cell.cellNumber = indexPath.item; //???
-        cell.data = data2[indexPath.section];
+        cell.data = data[indexPath.section];
         
-        switch indexPath.section {
-        case 0:
-            cell.accountHorizantalCollectionViewLabel.text = "Favorit";
-        default:
-            cell.accountHorizantalCollectionViewLabel.text = "Watchlist";
-        }
-        
-//        guard data != [] else { return cell }
-//        cell.data = data;
-//        cell.accountHorizantalCollectionViewLabel.text = "Favorit";
-//        cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
-//        cell.data = data;
 //        switch indexPath.section {
 //        case 0:
-//            cell.backgroundColor = .systemPink;
-//        case 1:
-//            cell.backgroundColor = .systemBlue;
-//        case 2:
-//            cell.backgroundColor = .systemGray3;
+//            cell.accountHorizantalCollectionViewLabel.text = "Favorit";
 //        default:
-//            cell.backgroundColor = .systemGray;
+//            cell.accountHorizantalCollectionViewLabel.text = "Watchlist";
 //        }
-//        cell.backgroundColor = .systemPink;
+        
         return cell;
     }
     
@@ -213,7 +180,7 @@ extension AccountViewController: UICollectionViewDelegateFlowLayout {
         let bounds = collectionView.bounds;
 //        let width: CGFloat = (bounds.width-(10*3*1.5))/3;
         let width: CGFloat = bounds.width;
-        let size = CGSize(width: width, height: 200)
+        let size = CGSize(width: width, height: 250)
         return size;
     }
 }
