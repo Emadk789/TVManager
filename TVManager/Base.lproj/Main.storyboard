@@ -464,13 +464,13 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="674-Ws-BT2">
                                     <size key="itemSize" width="375" height="235"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="30"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="lnh-NA-9Lw" customClass="AccountViewControllerCell" customModule="TVManager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="235"/>
+                                        <rect key="frame" x="0.0" y="30" width="375" height="235"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="OaQ-YQ-95e">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="235"/>
@@ -525,6 +525,27 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SectionHeader" id="xCd-kd-VyC" customClass="CollectionViewHeader" customModule="TVManager" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cu7-K7-xHf">
+                                            <rect key="frame" x="16" y="1" width="41.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="cu7-K7-xHf" secondAttribute="trailing" constant="159" id="6ZH-81-ZDs"/>
+                                        <constraint firstItem="cu7-K7-xHf" firstAttribute="top" relation="lessThanOrEqual" secondItem="xCd-kd-VyC" secondAttribute="topMargin" id="IXC-xd-kMb"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="cu7-K7-xHf" secondAttribute="bottom" id="jYh-TU-Pdn"/>
+                                        <constraint firstItem="cu7-K7-xHf" firstAttribute="leading" secondItem="xCd-kd-VyC" secondAttribute="leadingMargin" constant="8" id="yGe-Ug-khB"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="sectionHeader" destination="cu7-K7-xHf" id="F27-le-pLh"/>
+                                    </connections>
+                                </collectionReusableView>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqb-D1-Xg9">
                                 <rect key="frame" x="167" y="45" width="41.5" height="26"/>
