@@ -29,6 +29,16 @@ class AccountViewController: UIViewController {
             collectionView.reloadData();
         }
     }
+    var TVData: [[UIImage?]] = [] {
+        didSet {
+            collectionView.reloadData();
+        }
+    }
+    var moviesData: [[UIImage?]] = [] {
+        didSet {
+            collectionView.reloadData();
+        }
+    }
     enum Requests {
         case account,
              createdLists(account: GetDetailsResponse? = nil),
@@ -75,7 +85,6 @@ class AccountViewController: UIViewController {
         collectionView.delegate = self;
         collectionView.dataSource = self;
         makeRequest(url: Requests.account.url, responseType: GetDetailsResponse.self, handler: .account);
-//        getAccount();
         
     }
     @IBAction func segmentViewClicked(_ sender: Any) {
@@ -83,71 +92,24 @@ class AccountViewController: UIViewController {
         data = []
         switch index {
         case 0:
-//            data = []
             var url = Requests.favorit(kind: .tv).url;
             makeRequest(url: url, responseType: GetPopularResponse.self, handler: .favorit());
             url = Requests.watchlist(kind: .tv).url;
             makeRequest(url: url, responseType: GetPopularResponse.self, handler: .watchlist());
-//            self.getFavorit(kind: .tv);
-//            self.getWatchlist(kind: .tv);
         case 1:
-//            data.removeAll()
             var url = Requests.favorit(kind: .movie).url;
             makeRequest(url: url, responseType: GetPopularResponse.self, handler: .favorit());
             url = Requests.watchlist(kind: .movie).url;
             makeRequest(url: url, responseType: GetPopularResponse.self, handler: .watchlist());
-//            self.getFavorit(kind: .movie);
-//            self.getWatchlist(kind: .movie);
         default:
             break
         }
-//        let x = (sender as! UISegmentedControl).selectedSegmentIndex;
     }
-//    func getAccount() {
-//        let url = TVClient.EndPoints.account.stringURL;
-//        TVClient.shared.getDecodableRequest(url: Requests.account.url, response: GetDetailsResponse.self) { (response, error) in
-//
-//            // TODO: Handel error and check the response!
-//            self.account = response;
-//            TVClient.Auth.setAccountID(id: "\(self.account.id)");
-//            self.getFavorit(kind: .tv);
-//            self.getWatchlist(kind: .tv)
-//            self.getCreatedLists();
-//            self.updateUI();
-//
-//        }
-//    }
     private func updateUI() {
         // TODO: You can store the username in UserDefaults!
         userNameLabel.text = "Hi, \(account.username)";
     }
-//    private func getCreatedLists() {
-//        let url = TVClient.EndPoints.getCreatedLists(accountID: "\(account.id)").stringURL;
-//        TVClient.shared.getDecodableRequest(url: Requests.createdLists(account: account).url, response: GetCreatedListsResponse.self) { (response, error) in
-//            // TODO: Handel error and check the response!
-//            self.createdLists = response;
-//        }
-//    }
-//    private func getFavorit(kind: TVClient.EndPoints.Kind) {
-//        let url = TVClient.EndPoints.getFavorite(kind).stringURL;
-//
-//        TVClient.shared.getDecodableRequest(url: Requests.favorit(kind: kind).url, response: GetPopularResponse.self) { (response, error) in
-////            response?.results[0].
-//            self.favoritResponse = response;
-//            self.downloadeImages(of: .favorit, response: response);
-//
-//        }
-//    }
-//    private func getWatchlist(kind: TVClient.EndPoints.Kind) {
-//        let url = TVClient.EndPoints.getWatchlist(kind).stringURL;
-//
-//        TVClient.shared.getDecodableRequest(url: Requests.watchlist(kind: kind).url, response: GetPopularResponse.self) { (response, error) in
-////            response?.results[0].
-//            self.watchlistResponse = response;
-//            self.downloadeImages(of: .watchlist, response: response);
-//
-//        }
-//    }
+
     private func downloadeImages(of type: DownloadType, response: GetPopularResponse?) {
         
         prepareData(kind: type, count: response?.results.count ?? 0);
@@ -159,35 +121,26 @@ class AccountViewController: UIViewController {
                 
             }
         }
-        
-//        var images: [UIImage?] = [];
-//        switch type {
-//        case .favorit:
-////            self.data.append([]);
-//            prepareData(kind: type, count: favoritResponse?.results.count ?? 0);
-//            for response in favoritResponse?.results ?? [] {
-//                TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error) in
-//                    if let index = self.data[type.intValue].firstIndex(of: nil) {
-//                        self.data[type.intValue][index] = image;
-//                    }
-////                    self.data[0].append(image);
-////                    self.data.append(image);
-////                    self.collectionView.reloadData();
-//                }
-//            }
-//        case .watchlist:
-////            self.data2.append([nil]);
-//            self.data.append([]);
-//            for response in watchlistResponse?.results ?? [] {
-////                self.data2[1] = [];
-//                TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error) in
-//                    self.data[1].append(image);
-////                    self.data.append(image);
-////                    self.collectionView.reloadData();
-//                }
-//            }
-//
-//        }
+    }
+    private func prepareData2(kind: DownloadType, count: Int) {
+        var index = 0;
+        let tempArray: [UIImage?] = [];
+//        repeat {
+//            data.append(tempArray);
+//        } while data.count <= kind.intValue
+//        var sum = 0;
+//        repeat {
+//            sum = 0;
+//            moviesData.append(tempArray);
+//            TVData.append(tempArray);
+//            sum = moviesData.count + TVData.count;
+//        } while sum <= kind.intValue
+        moviesData.append(tempArray);
+        TVData.append(tempArray);
+        while index < count {
+            data[kind.intValue].append(nil)
+            index+=1;
+        }
     }
     // MARK: - Helpers
     private func prepareData(kind: DownloadType, count: Int) {
@@ -196,7 +149,6 @@ class AccountViewController: UIViewController {
         repeat {
             data.append(tempArray);
         } while data.count <= kind.intValue
-
         while index < count {
             data[kind.intValue].append(nil)
             index+=1;
@@ -229,14 +181,8 @@ class AccountViewController: UIViewController {
         
         url = Requests.createdLists(account: account).url;
         makeRequest(url: url, responseType: GetCreatedListsResponse.self, handler: .createdLists());
-//        self.getFavorit(kind: .tv);
-//        self.getWatchlist(kind: .tv)
-//        self.getCreatedLists();
         self.updateUI();
     }
-//    private func makePostAccountRequests<responseType: Decodable>(url: URL, responseType: responseType.Type, handler: Requests) {
-//        makeRequest(url: url, responseType: responseType, handler: handler);
-//    }
     private func handelCreatedListsResponse<response: Decodable>(response: response) {
         self.createdLists = response as? GetCreatedListsResponse;
     }
@@ -256,9 +202,6 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
         data.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        favoritResponse?.results.count ?? 5;
-//        5
-//        data2[section].count;
         1
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -279,18 +222,10 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AccountViewControllerCell;
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AccountViewControllerCell;
         cell.backgroundColor = .systemTeal;
-//        cell.favoritResponse = self.favoritResponse;
         cell.cellNumber = indexPath.item; //???
         cell.data = data[indexPath.section];
-        
-//        switch indexPath.section {
-//        case 0:
-//            cell.accountHorizantalCollectionViewLabel.text = "Favorit";
-//        default:
-//            cell.accountHorizantalCollectionViewLabel.text = "Watchlist";
-//        }
         
         return cell;
     }
