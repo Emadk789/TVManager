@@ -14,6 +14,7 @@ class AccountHorizantalCollectionViewController: CollectionView, UICollectionVie
     
     var favoritResponse: GetPopularResponse? = nil;
     var data: [UIImage?] = [];
+    var cellNumber = 0;
 //    override func viewDidLoad() {
 //        super.viewDidLoad()
 //    }
@@ -36,6 +37,7 @@ class AccountHorizantalCollectionViewController: CollectionView, UICollectionVie
         cell.backgroundColor = .systemBlue;
         // Configure the cell
 //        let image = UIImage(data: data[indexPath.item]);
+        cell.cellNumber = cellNumber;
         cell.imageView.image = data[indexPath.item];
 //        print("This is the poster Path", image);
     

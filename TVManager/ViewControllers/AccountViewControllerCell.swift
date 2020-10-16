@@ -26,6 +26,7 @@ class AccountViewControllerCell: UICollectionViewCell {
     var data: [UIImage?] = [] {
         didSet {
             accountHorizantalCollectionViewController.data = data;
+            accountHorizantalCollectionViewController.cellNumber = cellNumber;
             accountHorizantalCollectionView.reloadData();
         }
     }

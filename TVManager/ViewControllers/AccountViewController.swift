@@ -224,7 +224,7 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AccountViewControllerCell;
         cell.backgroundColor = .systemTeal;
-        cell.cellNumber = indexPath.item; //???
+        cell.cellNumber = indexPath.section; //???
         cell.data = data[indexPath.section];
         
         return cell;
