@@ -29,11 +29,16 @@ class AccountViewController: UIViewController {
             collectionView.reloadData();
         }
     }
-    var TVData: [[UIImage?]] = []
-    var moviesData: [[UIImage?]] = []
-    let tempArray: [UIImage?] = [];
-//        let tempArray: [UIImage?] = [];
-
+    var TVData: [[UIImage?]] = [] {
+        didSet {
+            collectionView.reloadData();
+        }
+    }
+    var moviesData: [[UIImage?]] = [] {
+        didSet {
+            collectionView.reloadData();
+        }
+    }
     enum Requests {
         case account,
              createdLists(account: GetDetailsResponse? = nil),
@@ -81,32 +86,17 @@ class AccountViewController: UIViewController {
         collectionView.dataSource = self;
         makeRequest(url: Requests.account.url, responseType: GetDetailsResponse.self, handler: .account);
         
-        
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated);
-//        TVData.append(tempArray);
-//        moviesData.append(tempArray);
     }
     @IBAction func segmentViewClicked(_ sender: Any) {
         let index = segmentView.selectedSegmentIndex;
         data = []
         switch index {
         case 0:
-            if !TVData[0].isEmpty {
-                collectionView.reloadData();
-                return;
-            }
             var url = Requests.favorit(kind: .tv).url;
             makeRequest(url: url, responseType: GetPopularResponse.self, handler: .favorit());
             url = Requests.watchlist(kind: .tv).url;
             makeRequest(url: url, responseType: GetPopularResponse.self, handler: .watchlist());
         case 1:
-            if !moviesData[0].isEmpty {
-                collectionView.reloadData();
-                return;
-            }
             var url = Requests.favorit(kind: .movie).url;
             makeRequest(url: url, responseType: GetPopularResponse.self, handler: .favorit());
             url = Requests.watchlist(kind: .movie).url;
@@ -127,17 +117,6 @@ class AccountViewController: UIViewController {
             TVClient.shared.downloadeImages(path: response.posterPath!) { (image, error) in
                 if let index = self.data[type.intValue].firstIndex(of: nil) {
                     self.data[type.intValue][index] = image;
-                }
-                
-                switch self.segmentView.selectedSegmentIndex {
-                case 0:
-//                    self.TVData[type.intValue].append(image);
-                    self.TVData = self.data;
-                case 1:
-//                    self.moviesData[type.intValue].append(image);
-                    self.moviesData = self.data;
-                default:
-                    break;
                 }
                 
             }
@@ -167,23 +146,8 @@ class AccountViewController: UIViewController {
     private func prepareData(kind: DownloadType, count: Int) {
         var index = 0;
         let tempArray: [UIImage?] = [];
-////        let tempArray: [UIImage?] = [];
-//        self.TVData.append(tempArray);
-//        self.moviesData.append(tempArray);
         repeat {
             data.append(tempArray);
-            if data.count > TVData.count || data.count > moviesData.count {
-                switch segmentView.selectedSegmentIndex {
-                case 0:
-                    TVData.append(tempArray);
-                case 1:
-                    moviesData.append(tempArray);
-                default:
-                    break;
-                }
-                
-                
-            }
         } while data.count <= kind.intValue
         while index < count {
             data[kind.intValue].append(nil)
@@ -232,23 +196,10 @@ class AccountViewController: UIViewController {
     }
 
 }
-//MARK: - UICollectionViewDataSource & UICollectionViewDelegate
+//MARK:- UICollectionViewDelegate & UICollectionViewDataSource
 extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        data.count;
-        var numberOfSections = 0;
-        switch segmentView.selectedSegmentIndex {
-        case 0:
-            numberOfSections = TVData.count;
-        case 1:
-            numberOfSections = moviesData.count;
-        default:
-            break
-        }
-        if numberOfSections == 0 {
-            numberOfSections = data.count;
-        }
-        return numberOfSections;
+        data.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         1
@@ -274,27 +225,8 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AccountViewControllerCell;
         cell.backgroundColor = .systemTeal;
         cell.cellNumber = indexPath.item; //???
-//        cell.data = data[indexPath.section];
+        cell.data = data[indexPath.section];
         
-        var myData: [[UIImage?]] = [];
-        if TVData[indexPath.section].isEmpty || moviesData[indexPath.section].isEmpty {
-            myData = data;
-        }
-//        myData = TVData.isEmpty && moviesData.isEmpty ? self.data : D
-        switch segmentView.selectedSegmentIndex {
-        case 0:
-            if !TVData[indexPath.section].isEmpty {
-                myData = TVData;
-            }
-            
-        case 1:
-            if !moviesData[indexPath.section].isEmpty {
-                myData = moviesData;
-            }
-        default:
-            break
-        }
-        cell.data = myData[indexPath.section];
         return cell;
     }
     
