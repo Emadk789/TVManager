@@ -208,11 +208,17 @@
                                                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="22.5"/>
                                                                                 <color key="tintColor" systemColor="systemRedColor"/>
                                                                                 <state key="normal" image="stopwatch" catalog="system"/>
+                                                                                <connections>
+                                                                                    <action selector="watchlistButtonClicked:" destination="Amu-Q3-bmP" eventType="touchUpInside" id="V5m-X6-vk9"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6y-w7-lkK">
                                                                                 <rect key="frame" x="0.0" y="29.5" width="25" height="22"/>
                                                                                 <color key="tintColor" systemColor="systemRedColor"/>
                                                                                 <state key="normal" image="suit.heart" catalog="system"/>
+                                                                                <connections>
+                                                                                    <action selector="favoritButtonClicked:" destination="Amu-Q3-bmP" eventType="touchUpInside" id="WQA-41-57u"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <constraints>

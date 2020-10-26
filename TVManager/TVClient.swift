@@ -72,7 +72,9 @@ class TVClient {
         case account;
         case getCreatedLists(accountID: String);
         case getFavorite(Kind);
-        case getWatchlist(Kind)
+        case getWatchlist(Kind);
+        
+        case postFavorite;
         
         case getPopular(Kind);
         enum Kind {
@@ -121,6 +123,8 @@ class TVClient {
                     return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/watchlist/movies\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
                     
                 }
+            case .postFavorite:
+                return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/favorite\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
             }
         }
     }
@@ -193,6 +197,29 @@ class TVClient {
                 TVClient.hasSessionID = true;
                 TVClient.defaults.set(true, forKey: "hasSessionID")
                 TVClient.defaults.set("\(result.sessionId)", forKey: "sessionID");
+                compleation(true, nil);
+            } catch {
+//                print(error);
+                fatalError("Error getting session ID");
+            }
+        }
+        
+        
+        
+    }
+    
+    func PostDecodableRequest(kind: EndPoints.Kind, compleation: @escaping (Bool, Error?) -> Void) {
+        let url = TVClient.EndPoints.postFavorite.stringURL;
+        let params = ["media_type": "\(kind)", "media_id": 11, "favorite": true] as [String : Any];
+        AF.request(url, method: .post, parameters: params).responseJSON { (response) in
+            // TODO: Handel error, IF user clickes denay on the websit or any other reason
+            guard let data = response.data else { return }
+            do {
+                let result = try TVClient.decoder.decode(SessionResponse.self, from: data);
+//                TVClient.Auth.sessionID = result.sessionId;
+//                TVClient.hasSessionID = true;
+//                TVClient.defaults.set(true, forKey: "hasSessionID")
+//                TVClient.defaults.set("\(result.sessionId)", forKey: "sessionID");
                 compleation(true, nil);
             } catch {
 //                print(error);
