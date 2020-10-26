@@ -14,10 +14,21 @@ class HomeViewController: UIViewController {
     lazy var verticalCollectionViewController = VerticalCollectionViewController();
     
     @IBOutlet weak var searchButton: UIButton!
+    
+    //TODO: Send the request with the image data
+    
+    var responses: Responses? {
+        didSet {
+            
+            verticalCollectionViewController.responses = responses;
+            verticalCollectionView.reloadData();
+        }
+    };
+    
     var data: [[UIImage?]] = [] {
         didSet {
             verticalCollectionViewController.data = data;
-            verticalCollectionView.reloadData();
+//            verticalCollectionView.reloadData();
         }
     };
     enum Kind: Int {
@@ -50,7 +61,9 @@ class HomeViewController: UIViewController {
     }
     private func handelHomeResponses(response: GetPopularResponse?, kind: Kind, error: Error?) {
         if error != nil { return }
+        
         if let response = response {
+            responses = Responses(response: response);
             prepareData(kind: kind, count: response.results.count);
             callDownloadeImages(kind: kind, results: response.results);
         }
@@ -58,6 +71,8 @@ class HomeViewController: UIViewController {
     func handelDownloadeHomeImages(image: UIImage?, error: Error?, kind: Kind) {
         if let index = data[kind.rawValue].firstIndex(of: nil) {
             data[kind.rawValue][index] = image;
+            responses?.data[kind.rawValue][index] = image;
+            
         }
     }
     // MARK: - Helpers
@@ -65,10 +80,13 @@ class HomeViewController: UIViewController {
         var index = 0;
         let tempArray: [UIImage?] = [];
         data.append(tempArray);
+        responses?.data.append(tempArray);
             while index < count {
                 data[kind.rawValue].append(nil)
+//                responses?.data[kind.rawValue].append(nil);
                 index+=1;
             }
+        responses?.data = data;
     }
     private func callDownloadeImages(kind: Kind, results: [Result]) {
         for result in results {

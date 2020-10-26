@@ -11,4 +11,12 @@ import UIKit
 class HorizantalCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     
+    
+    @IBAction func watchlistButtonClicked(_ sender: Any) {
+        //TODO: Add from watchlist!
+    }
+    
+    @IBAction func favoritButtonClicked(_ sender: Any) {
+        //TODO: Add from favoritlist
+    }
 }

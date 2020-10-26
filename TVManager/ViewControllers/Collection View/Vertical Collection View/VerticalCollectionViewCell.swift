@@ -15,6 +15,13 @@ class VerticalCollectionViewCell: UICollectionViewCell {
             horizantalCollectionView.reloadData();
         }
     }
+    //TODO: Try instantiating it in the previous controller!!!
+    var response: Response? {
+        didSet {
+            horizantalCollectionViewController.response = response;
+            horizantalCollectionView.reloadData();
+        }
+    }
 
     @IBOutlet weak var horizantalCollectionView: UICollectionView!
     

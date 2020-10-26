@@ -13,11 +13,13 @@ class VerticalCollectionViewController: CollectionView, UICollectionViewDataSour
     var movieData: [[UIImage?]] = [];
     var tvData: [[UIImage?]] = [];
     var data: [[UIImage?]] = [];
+    var responses: Responses?
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         //
         //        3
 //        HorizantalCollectionViewDataSource.data.count;
-        data.count;
+//        data.count;
+        (responses?.data.count) ?? 0;
         
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -48,7 +50,14 @@ class VerticalCollectionViewController: CollectionView, UICollectionViewDataSour
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
 //            cell.backgroundColor = .darkGray;
 //            cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
-            cell.data = data[indexPath.section];
+//            cell.data = data[indexPath.section];
+//            let x = responses?.responsex
+            let result = Result(posterPath: nil, popularity: nil, id: nil, name: nil, title: nil, originalName: nil, overview: nil);
+            let response = GetPopularResponse(page: 10, totalResults: 1, totalPages: 1, results: [result])
+            cell.response = Response(response: response);
+            
+            cell.response?.response = responses!.response;
+            cell.response?.data = (responses?.data[indexPath.section])!;
             return cell;
         }
         

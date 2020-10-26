@@ -10,16 +10,21 @@ import UIKit
 
 class HorizantalCollectionViewController: CollectionView, UICollectionViewDataSource {
     var data: [UIImage?] = []
+    var response: Response?
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let number4 = data.count;
+        var number4 = data.count;
+        number4 = (response?.data.count) ?? 0;
+        
         return number4;
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! HorizantalCollectionViewCell;
         cell.backgroundColor = .systemBlue;
-        cell.imageView.image = data[indexPath.item];
+//        cell.imageView.image = data[indexPath.item];
+        cell.imageView.image = response?.data[indexPath.item];
+        print("This is the Media ID", response?.response.results[indexPath.item].id)
         return cell;
     }
 }
