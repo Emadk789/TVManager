@@ -10,7 +10,8 @@ import UIKit
 
 class HorizantalCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
-    
+    var mediaID = 0;
+    var mediaType: TVClient.EndPoints.Kind = .movie;
     
     @IBAction func watchlistButtonClicked(_ sender: Any) {
         //TODO: Add from watchlist!

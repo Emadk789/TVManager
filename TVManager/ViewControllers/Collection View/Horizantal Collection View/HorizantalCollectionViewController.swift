@@ -23,7 +23,13 @@ class HorizantalCollectionViewController: CollectionView, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! HorizantalCollectionViewCell;
         cell.backgroundColor = .systemBlue;
 //        cell.imageView.image = data[indexPath.item];
-        cell.imageView.image = response?.data[indexPath.item];
+        if let response = response {
+            cell.imageView.image = response.data[indexPath.item];
+            cell.mediaID = response.response.results[indexPath.item].id!
+            cell.mediaType = response.mediaType
+            print("This is the response mediaType", response.mediaType);
+        }
+        
         print("This is the Media ID", response?.response.results[indexPath.item].id)
         return cell;
     }

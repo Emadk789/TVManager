@@ -48,22 +48,28 @@ class VerticalCollectionViewController: CollectionView, UICollectionViewDataSour
         let cell: UICollectionViewCell;
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
-//            cell.backgroundColor = .darkGray;
-//            cell.data = HorizantalCollectionViewDataSource.data[indexPath.section];
-//            cell.data = data[indexPath.section];
-//            let x = responses?.responsex
-            let result = Result(posterPath: nil, popularity: nil, id: nil, name: nil, title: nil, originalName: nil, overview: nil);
-            let response = GetPopularResponse(page: 10, totalResults: 1, totalPages: 1, results: [result])
-            cell.response = Response(response: response);
             
-            cell.response?.response = responses!.response;
-            cell.response?.data = (responses?.data[indexPath.section])!;
+            cell.response = setupResponse();
+            print("This is the responses mediaType", responses?.mediaTypes)
+            if let responses = responses {
+                cell.response?.mediaType = responses.mediaTypes[indexPath.section];
+                cell.response?.response = responses.response;
+                cell.response?.data = responses.data[indexPath.section];
+            }
+            
+            
             return cell;
         }
         
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath);
         cell.backgroundColor = .systemRed;
         return cell;
+    }
+    //MARK:- Helper(s)
+    private func setupResponse() -> Response {
+        let result = Result(posterPath: nil, popularity: nil, id: nil, name: nil, title: nil, originalName: nil, overview: nil);
+        let response = GetPopularResponse(page: 10, totalResults: 1, totalPages: 1, results: [result])
+        return Response(response: response);
     }
     
 }

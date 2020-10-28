@@ -23,14 +23,14 @@ class HomeViewController: UIViewController {
             verticalCollectionViewController.responses = responses;
             verticalCollectionView.reloadData();
         }
-    };
-    
+    }
+    var mediaTypes: [TVClient.EndPoints.Kind] = [];
     var data: [[UIImage?]] = [] {
         didSet {
             verticalCollectionViewController.data = data;
 //            verticalCollectionView.reloadData();
         }
-    };
+    }
     enum Kind: Int {
         case PopularTV = 0, PopularMovie = 1;
     }
@@ -64,6 +64,12 @@ class HomeViewController: UIViewController {
         
         if let response = response {
             responses = Responses(response: response);
+//            switch kind {
+//            case .PopularMovie:
+//                responses = Responses(response: response, mediaType: .movie);
+//            case .PopularTV:
+//                responses = Responses(response: response, mediaType: .tv);
+//            }
             prepareData(kind: kind, count: response.results.count);
             callDownloadeImages(kind: kind, results: response.results);
         }
@@ -80,13 +86,23 @@ class HomeViewController: UIViewController {
         var index = 0;
         let tempArray: [UIImage?] = [];
         data.append(tempArray);
+        
         responses?.data.append(tempArray);
             while index < count {
                 data[kind.rawValue].append(nil)
 //                responses?.data[kind.rawValue].append(nil);
                 index+=1;
             }
+        switch kind {
+        case .PopularMovie:
+            mediaTypes.append(.movie);
+        case .PopularTV:
+            mediaTypes.append(.tv);
+        }
+        responses?.mediaTypes = mediaTypes;
         responses?.data = data;
+//        responses?.mediaTypes.append(.movie)
+        
     }
     private func callDownloadeImages(kind: Kind, results: [Result]) {
         for result in results {
