@@ -15,7 +15,6 @@ class VerticalCollectionViewCell: UICollectionViewCell {
             horizantalCollectionView.reloadData();
         }
     }
-    //TODO: Try instantiating it in the previous controller!!!
     var response: Response? {
         didSet {
             horizantalCollectionViewController.response = response;
@@ -33,34 +32,13 @@ class VerticalCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         horizantalCollectionView.delegate = horizantalCollectionViewController;
         horizantalCollectionView.dataSource = horizantalCollectionViewController;
-//        switch VerticalCollectionViewCell.type {
-//        case .tv:
-//            horizantalCollectionView.delegate = horizantalCollectionViewController;
-//            horizantalCollectionView.dataSource = horizantalCollectionViewController;
-////            horizantalCollectionViewController.type = .tv;
-////            horizantalCollectionViewController.data = data;
-////            horizantalCollectionView.reloadData();
-//        default:
-//            horizantalCollectionViewController.type = .movie;
-//            break;
-//        }
-//        horizantalCollectionView.delegate = horizantalCollectionViewController;
-//        horizantalCollectionView.dataSource = horizantalCollectionViewController;
-        
-//        horizantalCollectionView.reloadData();
-        
     }
-//    func test() {}
     override init(frame: CGRect) {
         super.init(frame: frame);
-//        horizantalCollectionView.delegate = horizantalCollectionViewController;
-//        horizantalCollectionView.dataSource = horizantalCollectionViewController;
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder);
-        
-//        fatalError("init(coder:) has not been implemented")
     }
     
 }

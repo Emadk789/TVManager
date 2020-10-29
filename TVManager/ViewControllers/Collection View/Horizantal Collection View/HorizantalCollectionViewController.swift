@@ -22,27 +22,11 @@ class HorizantalCollectionViewController: CollectionView, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! HorizantalCollectionViewCell;
         cell.backgroundColor = .systemBlue;
-//        cell.imageView.image = data[indexPath.item];
         if let response = response {
             cell.imageView.image = response.data[indexPath.item];
             cell.mediaID = response.response.results[indexPath.item].id!
             cell.mediaType = response.mediaType
-            print("This is the response mediaType", response.mediaType);
         }
-        
-        print("This is the Media ID", response?.response.results[indexPath.item].id)
         return cell;
     }
 }
-
-//extension HorizantalCollectionViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let size: CGSize;
-//
-//        let bounds = collectionView.bounds;
-//        let width: CGFloat = (bounds.width-(10*3*1.5))/3;
-//        size = CGSize(width: width, height: collectionView.bounds.height);
-//
-//        return size;
-//    }
-//}

@@ -50,7 +50,6 @@ class VerticalCollectionViewController: CollectionView, UICollectionViewDataSour
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
             
             cell.response = setupResponse();
-            print("This is the responses mediaType", responses?.mediaTypes)
             if let responses = responses {
                 cell.response?.mediaType = responses.mediaTypes[indexPath.section];
                 cell.response?.response = responses.response;

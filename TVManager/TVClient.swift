@@ -199,30 +199,21 @@ class TVClient {
                 TVClient.defaults.set("\(result.sessionId)", forKey: "sessionID");
                 compleation(true, nil);
             } catch {
-//                print(error);
                 fatalError("Error getting session ID");
             }
         }
-        
-        
-        
     }
     
-    func PostDecodableRequest(kind: EndPoints.Kind, compleation: @escaping (Bool, Error?) -> Void) {
+    func PostDecodableRequest(kind: EndPoints.Kind, mediaID: Int, compleation: @escaping (Bool, Error?) -> Void) {
         let url = TVClient.EndPoints.postFavorite.stringURL;
-        let params = ["media_type": "\(kind)", "media_id": 11, "favorite": true] as [String : Any];
+        let params = ["media_type": "\(kind)", "media_id": mediaID, "favorite": true] as [String : Any];
         AF.request(url, method: .post, parameters: params).responseJSON { (response) in
-            // TODO: Handel error, IF user clickes denay on the websit or any other reason
+            // TODO: Ceck the Docs and make the response model
             guard let data = response.data else { return }
             do {
                 let result = try TVClient.decoder.decode(SessionResponse.self, from: data);
-//                TVClient.Auth.sessionID = result.sessionId;
-//                TVClient.hasSessionID = true;
-//                TVClient.defaults.set(true, forKey: "hasSessionID")
-//                TVClient.defaults.set("\(result.sessionId)", forKey: "sessionID");
                 compleation(true, nil);
             } catch {
-//                print(error);
                 fatalError("Error getting session ID");
             }
         }
@@ -260,35 +251,6 @@ class TVClient {
         }
     }
     
-    
-//    func getPopularTVShows(completion: @escaping ((GetPopularResponse?, Error?) -> Void)){
-//        let url = TVClient.EndPoints.getPopular(.tv).stringURL;
-//        getDecodableRequest(url: url, response: GetPopularResponse.self) { (response, error) in
-//
-//        }
-//        //TODO: Get the popular tv shows and show them in the horizantal collection view controller
-//        AF.request(url).responseJSON { (response) in
-//            switch response.result {
-//            case .success:
-//                guard let data = response.data else { return }
-////                print(response)
-////                debugPrint(response);
-//                do {
-//                    let result = try TVClient.decoder.decode(GetPopularResponse.self, from: data);
-//                    completion(result, nil)
-////                    print(result)
-//                } catch {
-//                    print(error);
-//                }
-//
-//                break;
-//            case .failure:
-//                break;
-//            }
-//        }
-//
-//
-//    }
     func downloadeHomeImages(path: String, Kind: HomeViewController.Kind, completion: @escaping (UIImage?, Error?, HomeViewController.Kind) -> Void) {
         print(path);
         let url = TVClient.ImageEndPoints.getImageWith(path: path).stringValue;
@@ -306,47 +268,10 @@ class TVClient {
         AF.request(url).response { (response) in
             guard let data = response.data else { return }
             let image = UIImage(data: data);
-//            HorizantalCollectionViewDataSource.posterImages.append(image);
-//            HorizantalCollectionViewDataSource.posterImages[HorizantalCollectionViewDataSource.posterImages.firstIndex(of: nil) ?? 0] = image;
             DispatchQueue.main.async {
                 completion(image, nil);
             }
-            
-//            switch imageType {
-//            case .tv:
-//                _ = HorizantalCollectionViewDataSource.HorizantalCollectionViewType.tv(image: image).setData
-//
-//            case .movie:
-//                _ = HorizantalCollectionViewDataSource.HorizantalCollectionViewType.movie(image: image).setData
-//            }
-//            HorizantalCollectionViewDataSource.data[0][HorizantalCollectionViewDataSource.data[0].firstIndex(of: nil) ?? 0] = image;
-//            for i in 0..<HorizantalCollectionViewDataSource.imagesToLoade {
-//                if HorizantalCollectionViewDataSource.posterImages[i] == nil {
-//                    HorizantalCollectionViewDataSource.posterImages[i] = image;
-//                    break;
-//                }
-//            }
-//            completion(true, nil);
         }
-//        AF.request(url).
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
