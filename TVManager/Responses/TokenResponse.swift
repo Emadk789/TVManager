@@ -13,3 +13,8 @@ struct TokenResponse: Decodable {
     requestToken: String,
     success: Bool;
 }
+
+struct FeedbackResponse: Decodable {
+    var statusCode: Int,
+        statusMessage: String
+}

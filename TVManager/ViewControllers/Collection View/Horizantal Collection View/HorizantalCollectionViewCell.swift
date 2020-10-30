@@ -20,7 +20,7 @@ class HorizantalCollectionViewCell: UICollectionViewCell {
     @IBAction func favoritButtonClicked(_ sender: Any) {
         //TODO: Add from favoritlist
         
-        TVClient.shared.PostDecodableRequest(kind: mediaType) { (success, error) in
+        TVClient.shared.PostDecodableRequest(kind: mediaType, mediaID: mediaID) { (success, error) in
             print("sucess", success, "and", error);
         }
     }

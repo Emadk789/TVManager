@@ -207,11 +207,12 @@ class TVClient {
     func PostDecodableRequest(kind: EndPoints.Kind, mediaID: Int, compleation: @escaping (Bool, Error?) -> Void) {
         let url = TVClient.EndPoints.postFavorite.stringURL;
         let params = ["media_type": "\(kind)", "media_id": mediaID, "favorite": true] as [String : Any];
+        print("URL", url, "params", params);
         AF.request(url, method: .post, parameters: params).responseJSON { (response) in
             // TODO: Ceck the Docs and make the response model
             guard let data = response.data else { return }
             do {
-                let result = try TVClient.decoder.decode(SessionResponse.self, from: data);
+                let result = try TVClient.decoder.decode(FeedbackResponse.self, from: data);
                 compleation(true, nil);
             } catch {
                 fatalError("Error getting session ID");
