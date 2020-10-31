@@ -157,6 +157,17 @@
 			path = "Collection View";
 			sourceTree = "<group>";
 		};
+		69352CD8254DF2F200E33ABD /* Acount View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				69BAA1682513C0F600C380E0 /* AccountViewController.swift */,
+				698861F3251E8F7F008662A9 /* AccountViewControllerCell.swift */,
+				698861F7251E914A008662A9 /* AccountHorizantalCollectionViewController.swift */,
+				69CBD059252474EE00A18DE8 /* AccountHorizantalCollectionViewCell.swift */,
+			);
+			path = "Acount View Controllers";
+			sourceTree = "<group>";
+		};
 		696639A62502DCEC00B23B05 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,10 +194,7 @@
 			children = (
 				696CEC7324FD4563005CBC78 /* LoginViewController.swift */,
 				696639AE2504271B00B23B05 /* HomeViewController.swift */,
-				69BAA1682513C0F600C380E0 /* AccountViewController.swift */,
-				698861F3251E8F7F008662A9 /* AccountViewControllerCell.swift */,
-				698861F7251E914A008662A9 /* AccountHorizantalCollectionViewController.swift */,
-				69CBD059252474EE00A18DE8 /* AccountHorizantalCollectionViewCell.swift */,
+				69352CD8254DF2F200E33ABD /* Acount View Controllers */,
 				6914EE05250C3E810031CA80 /* Collection View */,
 				6914EE02250C39D50031CA80 /* Extensions */,
 				6914EE08250E08740031CA80 /* SearchViewController.swift */,
