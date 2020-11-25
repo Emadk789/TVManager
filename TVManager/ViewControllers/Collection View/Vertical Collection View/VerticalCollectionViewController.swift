@@ -54,6 +54,7 @@ class VerticalCollectionViewController: CollectionView, UICollectionViewDataSour
                 cell.response?.mediaType = responses.mediaTypes[indexPath.section];
                 cell.response?.response = responses.response;
                 cell.response?.data = responses.data[indexPath.section];
+                
             }
             
             

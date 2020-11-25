@@ -15,8 +15,6 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var searchButton: UIButton!
     
-    //TODO: Send the request with the image data
-    
     var responses: Responses? {
         didSet {
             
@@ -28,16 +26,11 @@ class HomeViewController: UIViewController {
     var data: [[UIImage?]] = [] {
         didSet {
             verticalCollectionViewController.data = data;
-//            verticalCollectionView.reloadData();
         }
     }
     enum Kind: Int {
         case PopularTV = 0, PopularMovie = 1;
     }
-    
-    
-//    var accountViewControllerDelegate: AccountViewControllerDelegate!;
-    
     override func viewDidLoad() {
         super.viewDidLoad();
         let TVURL = TVClient.EndPoints.getPopular(.tv).stringURL;
@@ -64,12 +57,6 @@ class HomeViewController: UIViewController {
         
         if let response = response {
             responses = Responses(response: response);
-//            switch kind {
-//            case .PopularMovie:
-//                responses = Responses(response: response, mediaType: .movie);
-//            case .PopularTV:
-//                responses = Responses(response: response, mediaType: .tv);
-//            }
             prepareData(kind: kind, count: response.results.count);
             callDownloadeImages(kind: kind, results: response.results);
         }
