@@ -15,24 +15,36 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var searchButton: UIButton!
     
-    var responses: Responses? {
+//    var responses: Responses? {
+//        didSet {
+//
+//            verticalCollectionViewController.responses = responses;
+//            verticalCollectionView.reloadData();
+//        }
+//    }
+    var responses2: Responses2? {
         didSet {
             
-            verticalCollectionViewController.responses = responses;
+            verticalCollectionViewController.responses = responses2;
             verticalCollectionView.reloadData();
         }
     }
+//    var responses2: [Responses?] = []
     var mediaTypes: [TVClient.EndPoints.Kind] = [];
     var data: [[UIImage?]] = [] {
         didSet {
             verticalCollectionViewController.data = data;
         }
     }
-    enum Kind: Int {
+    enum Kind: Int, CaseIterable {
         case PopularTV = 0, PopularMovie = 1;
     }
     override func viewDidLoad() {
         super.viewDidLoad();
+        responses2 = Responses2(response2: [])
+        for _ in 0..<Kind.allCases.count {
+            responses2?.response2.append(nil)
+        }
         let TVURL = TVClient.EndPoints.getPopular(.tv).stringURL;
         TVClient.shared.getDecodableRequest(url: TVURL, kind: .PopularTV, response: GetPopularResponse.self, completion: self.handelHomeResponses(response:kind:error:))
         
@@ -56,7 +68,10 @@ class HomeViewController: UIViewController {
         if error != nil { return }
         
         if let response = response {
-            responses = Responses(response: response);
+//            responses = Responses(response: response);
+//            responses2?.response2.append(response)
+            responses2?.response2[kind.rawValue] = response
+
             prepareData(kind: kind, count: response.results.count);
             callDownloadeImages(kind: kind, results: response.results);
         }
@@ -64,8 +79,8 @@ class HomeViewController: UIViewController {
     func handelDownloadeHomeImages(image: UIImage?, error: Error?, kind: Kind) {
         if let index = data[kind.rawValue].firstIndex(of: nil) {
             data[kind.rawValue][index] = image;
-            responses?.data[kind.rawValue][index] = image;
-            
+//            responses?.data[kind.rawValue][index] = image;
+            responses2?.data[kind.rawValue][index] = image
         }
     }
     // MARK: - Helpers
@@ -74,7 +89,7 @@ class HomeViewController: UIViewController {
         let tempArray: [UIImage?] = [];
         data.append(tempArray);
         
-        responses?.data.append(tempArray);
+//        responses?.data.append(tempArray);
             while index < count {
                 data[kind.rawValue].append(nil)
 //                responses?.data[kind.rawValue].append(nil);
@@ -86,8 +101,13 @@ class HomeViewController: UIViewController {
         case .PopularTV:
             mediaTypes.append(.tv);
         }
-        responses?.mediaTypes = mediaTypes;
-        responses?.data = data;
+//        responses?.mediaTypes = mediaTypes;
+//        responses?.data = data;
+        
+        responses2?.mediaTypes = mediaTypes
+        responses2?.data = data
+        
+//        responses2?.response2[kind.rawValue].
 //        responses?.mediaTypes.append(.movie)
         
     }

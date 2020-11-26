@@ -11,6 +11,7 @@ import UIKit;
 struct Responses {
     let response: GetPopularResponse;
 //    var mediaType: TVClient.EndPoints.Kind = .movie;
+//    let response2: [GetPopularResponse];
     var data: [[UIImage?]] = [];
     var mediaTypes: [TVClient.EndPoints.Kind] = []
     
@@ -23,4 +24,17 @@ struct Response {
     var response: GetPopularResponse;
     var mediaType: TVClient.EndPoints.Kind = .movie;
     var data: [UIImage?] = [];
+}
+
+struct Responses2 {
+//    let response: GetPopularResponse;
+//    var mediaType: TVClient.EndPoints.Kind = .movie;
+    var response2: [GetPopularResponse?];
+    var data: [[UIImage?]] = [];
+    var mediaTypes: [TVClient.EndPoints.Kind] = []
+    
+//    init(response: GetPopularResponse, mediaTypes: [TVClient.EndPoints.Kind]) {
+//        self.response = response;
+//        self.mediaTypes = mediaTypes;
+//    }
 }
