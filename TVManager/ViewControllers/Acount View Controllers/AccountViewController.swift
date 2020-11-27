@@ -14,16 +14,12 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var segmentView: UISegmentedControl!
-//    @IBOutlet weak var segmentControl: UISegmentedControl!
-    
     
     var account: GetDetailsResponse!;
     var createdLists: GetCreatedListsResponse!;
     var favoritResponse: GetPopularResponse? = nil;
     var watchlistResponse: GetPopularResponse? = nil;
-    //TODO: Then make the finel look like HomeViewController.
-    //TODO: Then generlize the two files and reues the same methods.
-    //TODO: Have two different datasources for the .tv and .movie kinds
+
     var data: [[UIImage?]] = [] {
         didSet {
             collectionView.reloadData();
@@ -125,16 +121,7 @@ class AccountViewController: UIViewController {
     private func prepareData2(kind: DownloadType, count: Int) {
         var index = 0;
         let tempArray: [UIImage?] = [];
-//        repeat {
-//            data.append(tempArray);
-//        } while data.count <= kind.intValue
-//        var sum = 0;
-//        repeat {
-//            sum = 0;
-//            moviesData.append(tempArray);
-//            TVData.append(tempArray);
-//            sum = moviesData.count + TVData.count;
-//        } while sum <= kind.intValue
+
         moviesData.append(tempArray);
         TVData.append(tempArray);
         while index < count {

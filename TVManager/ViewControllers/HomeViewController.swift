@@ -41,6 +41,14 @@ class HomeViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad();
+        getAccount()
+        getPopularRequests()
+
+        verticalCollectionView.delegate = verticalCollectionViewController;
+        verticalCollectionView.dataSource = verticalCollectionViewController;
+        
+    }
+    private func getPopularRequests() {
         responses2 = Responses2(response2: [])
         for _ in 0..<Kind.allCases.count {
             responses2?.response2.append(nil)
@@ -50,13 +58,6 @@ class HomeViewController: UIViewController {
         
         let MovieURL = TVClient.EndPoints.getPopular(.movie).stringURL;
         TVClient.shared.getDecodableRequest(url: MovieURL, kind: .PopularMovie, response: GetPopularResponse.self, completion: self.handelHomeResponses(response:kind:error:))
-
-        verticalCollectionView.delegate = verticalCollectionViewController;
-        verticalCollectionView.dataSource = verticalCollectionViewController;
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated);
     }
     @IBAction func searchButtonClicked(_ sender: Any) {
         searchButton.isHidden = !searchButton.isHidden;
@@ -126,4 +127,16 @@ extension HomeViewController: SearchButton {
 
 protocol SearchButton {
     func toggelSearchButton();
+}
+
+// MARK:- Get Account Info
+extension HomeViewController {
+    private func getAccount() {
+        let accountURL = TVClient.EndPoints.account.stringURL
+        
+        TVClient.shared.getDecodableRequest(url: accountURL, response: GetDetailsResponse.self) { (response, error) in
+            TVClient.Auth.setAccountID(id: "\(response!.id)")
+        }
+    }
+    
 }
