@@ -61,7 +61,7 @@ class AccountViewController: UIViewController {
         var stringValue: String {
             switch self {
             case .favorit:
-                return "Favorit";
+                return "Favorite";
             case .watchlist:
                 return "Watchlist";
             }
@@ -210,7 +210,7 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AccountViewControllerCell;
-        cell.backgroundColor = .systemTeal;
+//        cell.backgroundColor = .systemTeal;
         cell.cellNumber = indexPath.section; //???
         cell.data = data[indexPath.section];
         

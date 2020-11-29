@@ -75,6 +75,7 @@ class TVClient {
         case getWatchlist(Kind);
         
         case postFavorite;
+        case postWatchlist;
         
         case getPopular(Kind);
         enum Kind {
@@ -125,6 +126,8 @@ class TVClient {
                 }
             case .postFavorite:
                 return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/favorite\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
+            case .postWatchlist:
+                return URL(string: "\(TVClient.baseURL)account/\(Auth.accountID)/watchlist\(TVClient.Auth.APIKey)&session_id=\(TVClient.Auth.sessionID)")!
             }
         }
     }
@@ -204,9 +207,16 @@ class TVClient {
         }
     }
     
-    func PostDecodableRequest(kind: EndPoints.Kind, mediaID: Int, compleation: @escaping (Bool, Error?) -> Void) {
-        let url = TVClient.EndPoints.postFavorite.stringURL;
-        let params = ["media_type": "\(kind)", "media_id": mediaID, "favorite": true] as [String : Any];
+    func PostDecodableRequest(kind: EndPoints.Kind, mediaID: Int, listType: HorizantalCollectionViewCell.ListType, compleation: @escaping (Bool, Error?) -> Void) {
+        var url: URL
+        switch listType {
+        case .favorite:
+            url = TVClient.EndPoints.postFavorite.stringURL;
+        case .watchlist:
+            url = TVClient.EndPoints.postWatchlist.stringURL;
+        }
+        
+        let params = ["media_type": "\(kind)", "media_id": mediaID, listType.rawValue: true] as [String : Any];
         print("URL", url, "params", params);
         AF.request(url, method: .post, parameters: params).responseJSON { (response) in
             // TODO: Ceck the Docs and make the response model
