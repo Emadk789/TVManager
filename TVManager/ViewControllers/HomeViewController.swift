@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
     lazy var verticalCollectionViewController = VerticalCollectionViewController();
     
     @IBOutlet weak var searchButton: UIButton!
+    // TODO: Make a source of truth file for storing lists ids
     
 //    var responses: Responses? {
 //        didSet {
@@ -48,6 +49,10 @@ class HomeViewController: UIViewController {
         verticalCollectionView.dataSource = verticalCollectionViewController;
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("I am in view will appear", Data.favoriteList)
+    }
     private func getPopularRequests() {
         responses2 = Responses2(response2: [])
         for _ in 0..<Kind.allCases.count {
@@ -72,7 +77,9 @@ class HomeViewController: UIViewController {
 //            responses = Responses(response: response);
 //            responses2?.response2.append(response)
             responses2?.response2[kind.rawValue] = response
-
+        
+            
+            response.results[0].id
             prepareData(kind: kind, count: response.results.count);
             callDownloadeImages(kind: kind, results: response.results);
         }

@@ -42,6 +42,7 @@
 		69BAA1692513C0F600C380E0 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BAA1682513C0F600C380E0 /* AccountViewController.swift */; };
 		69BAA16B2513C40C00C380E0 /* AccoutResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BAA16A2513C40C00C380E0 /* AccoutResponse.swift */; };
 		69CBD05A252474EE00A18DE8 /* AccountHorizantalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CBD059252474EE00A18DE8 /* AccountHorizantalCollectionViewCell.swift */; };
+		69DC3B632575719700422DEB /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC3B622575719700422DEB /* Data.swift */; };
 		8E4E4101059D2CC9E6C4D792 /* libPods-TVManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5AEEC2C90F4FB9A9AA08046 /* libPods-TVManager.a */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		69BAA1682513C0F600C380E0 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		69BAA16A2513C40C00C380E0 /* AccoutResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccoutResponse.swift; sourceTree = "<group>"; };
 		69CBD059252474EE00A18DE8 /* AccountHorizantalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHorizantalCollectionViewCell.swift; sourceTree = "<group>"; };
+		69DC3B622575719700422DEB /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		D5AEEC2C90F4FB9A9AA08046 /* libPods-TVManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TVManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E91F9F6C64914AE8C2029376 /* Pods-TVManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVManager.debug.xcconfig"; path = "Target Support Files/Pods-TVManager/Pods-TVManager.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -226,6 +228,7 @@
 		696CEC6E24FD4563005CBC78 /* TVManager */ = {
 			isa = PBXGroup;
 			children = (
+				69DC3B612575717900422DEB /* Data */,
 				696CEC6F24FD4563005CBC78 /* AppDelegate.swift */,
 				696CEC7124FD4563005CBC78 /* SceneDelegate.swift */,
 				696639B02504272500B23B05 /* ViewControllers */,
@@ -241,6 +244,14 @@
 				696639A62502DCEC00B23B05 /* Responses */,
 			);
 			path = TVManager;
+			sourceTree = "<group>";
+		};
+		69DC3B612575717900422DEB /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				69DC3B622575719700422DEB /* Data.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6914EDFB250766BF0031CA80 /* HorizantalCollectionViewCell.swift in Sources */,
+				69DC3B632575719700422DEB /* Data.swift in Sources */,
 				696CEC7424FD4563005CBC78 /* LoginViewController.swift in Sources */,
 				696639B2250562A900B23B05 /* VerticalCollectionViewController.swift in Sources */,
 				696CEC7024FD4563005CBC78 /* AppDelegate.swift in Sources */,

@@ -176,6 +176,12 @@ class AccountViewController: UIViewController {
     private func handelFavoritResponse<response: Decodable>(response: response) {
         self.favoritResponse = response as? GetPopularResponse;
         self.downloadeImages(of: .favorit, response: response as? GetPopularResponse);
+        
+        for i in 0..<self.favoritResponse!.results.count {
+//                Data.init(favoriteList: <#T##[Int]#>, watchlist: <#T##[Int]#>)
+            Data.favoriteList.append(self.favoritResponse!.results[i].id!)
+//            Data.
+        }
     }
     private func handelWatchlistResponse<response: Decodable>(response: response) {
         self.watchlistResponse = response as? GetPopularResponse;
