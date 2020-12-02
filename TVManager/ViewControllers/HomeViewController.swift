@@ -14,15 +14,7 @@ class HomeViewController: UIViewController {
     lazy var verticalCollectionViewController = VerticalCollectionViewController();
     
     @IBOutlet weak var searchButton: UIButton!
-    // TODO: Make a source of truth file for storing lists ids
     
-//    var responses: Responses? {
-//        didSet {
-//
-//            verticalCollectionViewController.responses = responses;
-//            verticalCollectionView.reloadData();
-//        }
-//    }
     var responses2: Responses2? {
         didSet {
             
@@ -30,7 +22,6 @@ class HomeViewController: UIViewController {
             verticalCollectionView.reloadData();
         }
     }
-//    var responses2: [Responses?] = []
     var mediaTypes: [TVClient.EndPoints.Kind] = [];
     var data: [[UIImage?]] = [] {
         didSet {
@@ -40,19 +31,28 @@ class HomeViewController: UIViewController {
     enum Kind: Int, CaseIterable {
         case PopularTV = 0, PopularMovie = 1;
     }
+    enum ListType: CaseIterable {
+        case favorite, watchlist
+    }
     override func viewDidLoad() {
         super.viewDidLoad();
-        getAccount()
-        getPopularRequests()
-
+        
+        getAccount {
+            self.prepareDataLists {
+                self.getPopularRequests()
+            }
+        }
+        
         verticalCollectionView.delegate = verticalCollectionViewController;
         verticalCollectionView.dataSource = verticalCollectionViewController;
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("I am in view will appear", Data.favoriteList)
+        print("I am in view will appear", Data.favoriteLists.favoriteTVList)
     }
+
+
     private func getPopularRequests() {
         responses2 = Responses2(response2: [])
         for _ in 0..<Kind.allCases.count {
@@ -74,12 +74,9 @@ class HomeViewController: UIViewController {
         if error != nil { return }
         
         if let response = response {
-//            responses = Responses(response: response);
-//            responses2?.response2.append(response)
+
             responses2?.response2[kind.rawValue] = response
-        
-            
-            response.results[0].id
+
             prepareData(kind: kind, count: response.results.count);
             callDownloadeImages(kind: kind, results: response.results);
         }
@@ -87,7 +84,6 @@ class HomeViewController: UIViewController {
     func handelDownloadeHomeImages(image: UIImage?, error: Error?, kind: Kind) {
         if let index = data[kind.rawValue].firstIndex(of: nil) {
             data[kind.rawValue][index] = image;
-//            responses?.data[kind.rawValue][index] = image;
             responses2?.data[kind.rawValue][index] = image
         }
     }
@@ -138,12 +134,68 @@ protocol SearchButton {
 
 // MARK:- Get Account Info
 extension HomeViewController {
-    private func getAccount() {
+    private func getAccount(completion: @escaping () -> Void) {
         let accountURL = TVClient.EndPoints.account.stringURL
         
         TVClient.shared.getDecodableRequest(url: accountURL, response: GetDetailsResponse.self) { (response, error) in
             TVClient.Auth.setAccountID(id: "\(response!.id)")
+            completion()
         }
     }
     
+}
+
+// MARK:- DataLists
+extension HomeViewController {
+    private func prepareDataLists(completion: @escaping (() -> Void)) {
+        // Call getDataLists with all the cases of ListType
+        ListType.allCases.forEach{
+            getDataLists(listType: $0) {
+                completion()
+            }
+        }
+    }
+    private func getDataLists(listType: ListType, completion: @escaping (() -> Void)) {
+        var url: URL
+        switch listType {
+        case .favorite:
+            url = TVClient.EndPoints.getFavorite(.tv).stringURL;
+            print(url)
+            makeDecodableRequest(url: url) { results in
+                for i in 0..<results.count {
+                    Data.favoriteLists.favoriteTVList.append(results[i].id!)
+                }
+            }
+            
+            url = TVClient.EndPoints.getFavorite(.movie).stringURL;
+            makeDecodableRequest(url: url) { results in
+                for i in 0..<results.count {
+                    Data.favoriteLists.favoriteMovieList.append(results[i].id!)
+                }
+            }
+        case .watchlist:
+            url = TVClient.EndPoints.getWatchlist(.tv).stringURL;
+            makeDecodableRequest(url: url) { results in
+                for i in 0..<results.count {
+                    Data.watchlistLists.watchlistTVList.append(results[i].id!)
+                }
+            }
+            
+            url = TVClient.EndPoints.getWatchlist(.movie).stringURL;
+            makeDecodableRequest(url: url) { results in
+                for i in 0..<results.count {
+                    Data.watchlistLists.watchlistMovieList.append(results[i].id!)
+                }
+            }
+        }
+        
+    }
+    
+    private func makeDecodableRequest(url: URL, completion:  @escaping ([Result]) -> Void) {
+        TVClient.shared.getDecodableRequest(url: url, response: GetPopularResponse.self) { (response, error) in
+            if let response = response {
+                completion(response.results)
+            }
+        }
+    }
 }

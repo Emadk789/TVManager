@@ -13,25 +13,18 @@ class VerticalCollectionViewController: CollectionView, UICollectionViewDataSour
     var movieData: [[UIImage?]] = [];
     var tvData: [[UIImage?]] = [];
     var data: [[UIImage?]] = [];
-//    var responses: Responses?
     var responses: Responses2?
-    var counter: Int = 0
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        //
-        //        3
-//        HorizantalCollectionViewDataSource.data.count;
-//        data.count;
         (responses?.data.count) ?? 0;
         
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //        4
         1
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        print(responses?.response.results)
-        print(responses?.response2)
+
         if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as? CollectionViewHeader{
             var header = "Popular";
             switch indexPath.section {
@@ -53,23 +46,7 @@ class VerticalCollectionViewController: CollectionView, UICollectionViewDataSour
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? VerticalCollectionViewCell {
             
             cell.response = setupResponse();
-//            let y = responses?.response.results[indexPath.item].name
-//            print(y)
-//            let x = responses?.response.results[indexPath.item].id
-//            print(counter, y, x)
-            
-            let y = responses?.response2[indexPath.section]?.results[indexPath.item].name
-            print(y)
-            let x = responses?.response2[indexPath.section]?.results[indexPath.item].id
-            print(counter, y, x)
-            counter += 1
-            
-//            if let responses = responses {
-//                cell.response?.mediaType = responses.mediaTypes[indexPath.section];
-//                cell.response?.response = responses.response;
-//                cell.response?.data = responses.data[indexPath.section];
-//
-//            }
+
             if let responses = responses {
                 cell.response?.mediaType = responses.mediaTypes[indexPath.section];
                 cell.response?.response = responses.response2[indexPath.section]!;

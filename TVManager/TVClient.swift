@@ -61,6 +61,10 @@ class TVClient {
     
     
     enum EndPoints {
+        enum Kind {
+            case tv, movie;
+        }
+        
         case auth;
         case loginAuth;
         case getSessionID;
@@ -78,9 +82,6 @@ class TVClient {
         case postWatchlist;
         
         case getPopular(Kind);
-        enum Kind {
-            case tv, movie;
-        }
         
         
         var stringURL: URL {

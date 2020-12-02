@@ -102,7 +102,7 @@ class AccountViewController: UIViewController {
         }
     }
     private func updateUI() {
-        // TODO: You can store the username in UserDefaults!
+        // TODO: Store the username in UserDefaults!
         userNameLabel.text = "Hi, \(account.username)";
     }
 
@@ -177,11 +177,6 @@ class AccountViewController: UIViewController {
         self.favoritResponse = response as? GetPopularResponse;
         self.downloadeImages(of: .favorit, response: response as? GetPopularResponse);
         
-        for i in 0..<self.favoritResponse!.results.count {
-//                Data.init(favoriteList: <#T##[Int]#>, watchlist: <#T##[Int]#>)
-            Data.favoriteList.append(self.favoritResponse!.results[i].id!)
-//            Data.
-        }
     }
     private func handelWatchlistResponse<response: Decodable>(response: response) {
         self.watchlistResponse = response as? GetPopularResponse;
@@ -216,7 +211,7 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AccountViewControllerCell;
-//        cell.backgroundColor = .systemTeal;
+
         cell.cellNumber = indexPath.section; //???
         cell.data = data[indexPath.section];
         
@@ -228,7 +223,6 @@ extension AccountViewController: UICollectionViewDelegate, UICollectionViewDataS
 extension AccountViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let bounds = collectionView.bounds;
-//        let width: CGFloat = (bounds.width-(10*3*1.5))/3;
         let width: CGFloat = bounds.width;
         let size = CGSize(width: width, height: 250)
         return size;
