@@ -215,7 +215,7 @@
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6y-w7-lkK">
                                                                                 <rect key="frame" x="0.0" y="29.5" width="25" height="22"/>
                                                                                 <color key="tintColor" systemColor="systemRedColor"/>
-                                                                                <state key="normal" image="suit.heart" catalog="system"/>
+                                                                                <state key="normal" image="heart" catalog="system"/>
                                                                                 <connections>
                                                                                     <action selector="favoritButtonClicked:" destination="Amu-Q3-bmP" eventType="touchUpInside" id="WQA-41-57u"/>
                                                                                 </connections>
@@ -236,7 +236,9 @@
                                                                 </constraints>
                                                             </collectionViewCellContentView>
                                                             <connections>
+                                                                <outlet property="favoriteButton" destination="z6y-w7-lkK" id="1lU-ps-Jx7"/>
                                                                 <outlet property="imageView" destination="T8h-Rx-e1b" id="nEd-ep-1gQ"/>
+                                                                <outlet property="watchlistButton" destination="Je2-Bw-JyT" id="ftl-xT-ZB0"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
@@ -646,12 +648,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="stopwatch" catalog="system" width="121" height="128"/>
         <image name="stopwatch.fill" catalog="system" width="121" height="128"/>
-        <image name="suit.heart" catalog="system" width="128" height="109"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -16,7 +16,8 @@ class VerticalCollectionViewController: CollectionView, UICollectionViewDataSour
     var responses: Responses2?
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        (responses?.data.count) ?? 0;
+        print("This is the count of responses",  (responses?.data.count))
+        return (responses?.data.count) ?? 0;
         
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

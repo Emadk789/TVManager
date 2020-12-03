@@ -149,9 +149,13 @@ extension HomeViewController {
 extension HomeViewController {
     private func prepareDataLists(completion: @escaping (() -> Void)) {
         // Call getDataLists with all the cases of ListType
+        var count: Int = 0
         ListType.allCases.forEach{
             getDataLists(listType: $0) {
-                completion()
+                if count == 4 {
+                    completion()
+                }
+                count += 1
             }
         }
     }
@@ -164,6 +168,7 @@ extension HomeViewController {
             makeDecodableRequest(url: url) { results in
                 for i in 0..<results.count {
                     Data.favoriteLists.favoriteTVList.append(results[i].id!)
+                    completion()
                 }
             }
             
@@ -171,6 +176,7 @@ extension HomeViewController {
             makeDecodableRequest(url: url) { results in
                 for i in 0..<results.count {
                     Data.favoriteLists.favoriteMovieList.append(results[i].id!)
+                    completion()
                 }
             }
         case .watchlist:
@@ -178,6 +184,7 @@ extension HomeViewController {
             makeDecodableRequest(url: url) { results in
                 for i in 0..<results.count {
                     Data.watchlistLists.watchlistTVList.append(results[i].id!)
+                    completion()
                 }
             }
             
@@ -185,6 +192,7 @@ extension HomeViewController {
             makeDecodableRequest(url: url) { results in
                 for i in 0..<results.count {
                     Data.watchlistLists.watchlistMovieList.append(results[i].id!)
+                    completion()
                 }
             }
         }

@@ -10,6 +10,8 @@ import UIKit
 
 class HorizantalCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var watchlistButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
     var mediaID = 0;
     var mediaType: TVClient.EndPoints.Kind = .movie;
     
@@ -18,24 +20,16 @@ class HorizantalCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func watchlistButtonClicked(_ sender: Any) {
-//        TVClient.shared.PostDecodableRequest(kind: mediaType, mediaID: mediaID) { (success, error) in
-//            print("sucess", success, "and", error);
-//            let favorit = ListType.favorite.rawValue
-//        }
         makePostDecodableRequest(listType: ListType.watchlist)
     }
     
     @IBAction func favoritButtonClicked(_ sender: Any) {
         makePostDecodableRequest(listType: ListType.favorite)
-//        TVClient.shared.PostDecodableRequest(kind: mediaType, mediaID: mediaID) { (success, error) in
-//            print("sucess", success, "and", error);
-//        }
     }
     
     //MARK:- Helper(s)
     private func makePostDecodableRequest(listType: ListType){
         TVClient.shared.PostDecodableRequest(kind: mediaType, mediaID: mediaID, listType: listType) { (success, error) in
-            print("sucess", success, "and", error);
         }
     }
 }
