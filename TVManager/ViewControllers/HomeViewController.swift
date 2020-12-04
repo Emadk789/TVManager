@@ -9,7 +9,7 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
+    
     @IBOutlet weak var verticalCollectionView: UICollectionView!
     lazy var verticalCollectionViewController = VerticalCollectionViewController();
     
@@ -51,8 +51,8 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         print("I am in view will appear", Data.favoriteLists.favoriteTVList)
     }
-
-
+    
+    
     private func getPopularRequests() {
         responses2 = Responses2(response2: [])
         for _ in 0..<Kind.allCases.count {
@@ -74,9 +74,9 @@ class HomeViewController: UIViewController {
         if error != nil { return }
         
         if let response = response {
-
+            
             responses2?.response2[kind.rawValue] = response
-
+            
             prepareData(kind: kind, count: response.results.count);
             callDownloadeImages(kind: kind, results: response.results);
         }
@@ -92,27 +92,18 @@ class HomeViewController: UIViewController {
         var index = 0;
         let tempArray: [UIImage?] = [];
         data.append(tempArray);
-        
-//        responses?.data.append(tempArray);
-            while index < count {
-                data[kind.rawValue].append(nil)
-//                responses?.data[kind.rawValue].append(nil);
-                index+=1;
-            }
+        while index < count {
+            data[kind.rawValue].append(nil)
+            index+=1;
+        }
         switch kind {
         case .PopularMovie:
             mediaTypes.append(.movie);
         case .PopularTV:
             mediaTypes.append(.tv);
         }
-//        responses?.mediaTypes = mediaTypes;
-//        responses?.data = data;
-        
         responses2?.mediaTypes = mediaTypes
         responses2?.data = data
-        
-//        responses2?.response2[kind.rawValue].
-//        responses?.mediaTypes.append(.movie)
         
     }
     private func callDownloadeImages(kind: Kind, results: [Result]) {

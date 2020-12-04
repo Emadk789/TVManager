@@ -25,10 +25,7 @@ class VerticalCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var horizantalCollectionView: UICollectionView!
     
     lazy var horizantalCollectionViewController = HorizantalCollectionViewController();
-//    enum HorizantalCollectionViewType {
-//        case tv, movie;
-//    }
-//    static var type: HorizantalCollectionViewType = .tv;
+
     override func layoutSubviews() {
         horizantalCollectionView.delegate = horizantalCollectionViewController;
         horizantalCollectionView.dataSource = horizantalCollectionViewController;
