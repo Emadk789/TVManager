@@ -12,7 +12,15 @@ class HorizantalCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var watchlistButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
-    var mediaID = 0;
+//    var mediaID = 0;
+    var mediaID = 0 {
+        didSet {
+            if Data.favoriteLists.favoriteTVList.contains(mediaID) || Data.favoriteLists.favoriteMovieList.contains(mediaID) {
+                favoriteButton.imageView?.image = UIImage(systemName: "heart.fill")
+            }
+            
+        }
+    }
     var mediaType: TVClient.EndPoints.Kind = .movie;
     
     enum ListType: String {

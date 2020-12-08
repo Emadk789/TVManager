@@ -27,16 +27,23 @@ class HorizantalCollectionViewController: CollectionView, UICollectionViewDataSo
             cell.imageView.image = response.data[indexPath.item];
             cell.mediaID = mediaID
             cell.mediaType = response.mediaType
-            for id in Data.favoriteLists.favoriteTVList {
-                let itemID = mediaID
-                if mediaID == id {
-                    cell.favoriteButton.imageView?.image = UIImage(systemName: "heart.fill")
-                }
-                else {
-                    cell.favoriteButton.imageView?.image = UIImage(systemName: "heart")
-                }
-                
-            }
+            print(response.response.results[indexPath.item].name, mediaID)
+//            if Data.favoriteLists.favoriteTVList.contains(mediaID) {
+//                print(Data.favoriteLists.favoriteTVList.contains(mediaID), Data.favoriteLists.favoriteTVList[indexPath.item], mediaID)
+//                cell.favoriteButton.imageView?.image = UIImage(systemName: "heart.fill")
+//            }
+//            for id in Data.favoriteLists.favoriteTVList {
+////                let itemID = mediaID
+//                print(id, mediaID)
+//                if mediaID == id {
+//                    cell.favoriteButton.imageView?.isHidden = true
+//                    cell.favoriteButton.imageView?.image = UIImage(systemName: "heart.fill")
+//                }
+//                else {
+//                    cell.favoriteButton.imageView?.image = UIImage(systemName: "heart")
+//                }
+//
+//            }
         }
         cell.backgroundColor = .systemBlue
         return cell;
