@@ -27,9 +27,10 @@ class HorizantalCollectionViewController: CollectionView, UICollectionViewDataSo
             cell.imageView.image = response.data[indexPath.item];
             cell.mediaID = mediaID
             cell.mediaType = response.mediaType
-            print(response.response.results[indexPath.item].name, mediaID)
+            cell.layoutIfNeeded()
+//            print("Out side", response.response.results[indexPath.item].name, mediaID)
 //            if Data.favoriteLists.favoriteTVList.contains(mediaID) {
-//                print(Data.favoriteLists.favoriteTVList.contains(mediaID), Data.favoriteLists.favoriteTVList[indexPath.item], mediaID)
+//                print("---In Side", response.response.results[indexPath.item].name, mediaID)
 //                cell.favoriteButton.imageView?.image = UIImage(systemName: "heart.fill")
 //            }
 //            for id in Data.favoriteLists.favoriteTVList {
