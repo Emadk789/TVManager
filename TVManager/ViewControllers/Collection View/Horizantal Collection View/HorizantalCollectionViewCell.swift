@@ -15,10 +15,7 @@ class HorizantalCollectionViewCell: UICollectionViewCell {
 //    var mediaID = 0;
     var mediaID = 0 {
         didSet {
-            if Data.favoriteLists.favoriteTVList.contains(mediaID) || Data.favoriteLists.favoriteMovieList.contains(mediaID) {
-                print("yes")
-                favoriteButton.imageView?.image = UIImage(systemName: "heart.fill")
-            }
+            updateViews()
             
         }
     }
@@ -48,9 +45,16 @@ class HorizantalCollectionViewCell: UICollectionViewCell {
     }
     override func layoutIfNeeded() {
         super.layoutIfNeeded()
+        updateViews()
+    }
+    
+    private func updateViews() {
         if Data.favoriteLists.favoriteTVList.contains(mediaID) || Data.favoriteLists.favoriteMovieList.contains(mediaID) {
             print("yes")
             favoriteButton.imageView?.image = UIImage(systemName: "heart.fill")
+        }
+        if Data.watchlistLists.watchlistTVList.contains(mediaID) || Data.watchlistLists.watchlistMovieList.contains(mediaID) {
+            watchlistButton.imageView?.image = UIImage(systemName: "stopwatch.fill")
         }
     }
 }
