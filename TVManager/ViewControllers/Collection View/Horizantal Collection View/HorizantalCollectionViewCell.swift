@@ -26,11 +26,27 @@ class HorizantalCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func watchlistButtonClicked(_ sender: Any) {
+        //Add to watchlist
         makePostDecodableRequest(listType: ListType.watchlist)
     }
     
     @IBAction func favoritButtonClicked(_ sender: Any) {
-        makePostDecodableRequest(listType: ListType.favorite)
+        
+        switch favoriteButton.imageView?.image {
+        case UIImage(systemName: "heart.fill"):
+            //Remove from favoite
+            makePostDecodableRequest(listType: ListType.favorite)
+        case UIImage(systemName: "heart"):
+            //Add to favoite
+            makePostDecodableRequest(listType: ListType.favorite)
+        default:
+            break
+        }
+        
+        
+        
+        
+        
     }
     
     //MARK:- Helper(s)

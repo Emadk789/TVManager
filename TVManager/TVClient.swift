@@ -217,7 +217,7 @@ class TVClient {
             url = TVClient.EndPoints.postWatchlist.stringURL;
         }
         
-        let params = ["media_type": "\(kind)", "media_id": mediaID, listType.rawValue: true] as [String : Any];
+        let params = ["media_type": "\(kind)", "media_id": mediaID, listType.rawValue: false] as [String : Any];
         print("URL", url, "params", params);
         AF.request(url, method: .post, parameters: params).responseJSON { (response) in
             // TODO: Ceck the Docs and make the response model
