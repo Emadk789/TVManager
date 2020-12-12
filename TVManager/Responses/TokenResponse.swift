@@ -16,5 +16,6 @@ struct TokenResponse: Decodable {
 
 struct FeedbackResponse: Decodable {
     var statusCode: Int,
-        statusMessage: String
+        statusMessage: String,
+        success: Bool?
 }

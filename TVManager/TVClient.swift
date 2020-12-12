@@ -208,7 +208,7 @@ class TVClient {
         }
     }
     
-    func PostDecodableRequest(kind: EndPoints.Kind, mediaID: Int, listType: HorizantalCollectionViewCell.ListType, compleation: @escaping (Bool, Error?) -> Void) {
+    func PostDecodableRequest(kind: EndPoints.Kind, mediaID: Int, listType: HorizantalCollectionViewCell.ListType, add: Bool, compleation: @escaping (Bool, Error?) -> Void) {
         var url: URL
         switch listType {
         case .favorite:
@@ -217,7 +217,7 @@ class TVClient {
             url = TVClient.EndPoints.postWatchlist.stringURL;
         }
         
-        let params = ["media_type": "\(kind)", "media_id": mediaID, listType.rawValue: false] as [String : Any];
+        let params = ["media_type": "\(kind)", "media_id": mediaID, listType.rawValue: add] as [String : Any];
         print("URL", url, "params", params);
         AF.request(url, method: .post, parameters: params).responseJSON { (response) in
             // TODO: Ceck the Docs and make the response model

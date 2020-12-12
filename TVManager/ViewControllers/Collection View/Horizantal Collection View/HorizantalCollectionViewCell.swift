@@ -27,18 +27,23 @@ class HorizantalCollectionViewCell: UICollectionViewCell {
     
     @IBAction func watchlistButtonClicked(_ sender: Any) {
         //Add to watchlist
-        makePostDecodableRequest(listType: ListType.watchlist)
+        makePostDecodableRequest(listType: ListType.watchlist, add: true)
     }
     
     @IBAction func favoritButtonClicked(_ sender: Any) {
-        
-        switch favoriteButton.imageView?.image {
+        let x = favoriteButton.currentImage
+//        favoriteButton.currentImage?.isEqual(
+//            switch self {
+//
+//            }<#Any?#>)
+        switch favoriteButton.currentImage {
         case UIImage(systemName: "heart.fill"):
             //Remove from favoite
-            makePostDecodableRequest(listType: ListType.favorite)
+            makePostDecodableRequest(listType: ListType.favorite, add: true)
+            
         case UIImage(systemName: "heart"):
             //Add to favoite
-            makePostDecodableRequest(listType: ListType.favorite)
+            makePostDecodableRequest(listType: ListType.favorite, add: false)
         default:
             break
         }
@@ -50,8 +55,8 @@ class HorizantalCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK:- Helper(s)
-    private func makePostDecodableRequest(listType: ListType){
-        TVClient.shared.PostDecodableRequest(kind: mediaType, mediaID: mediaID, listType: listType) { (success, error) in
+    private func makePostDecodableRequest(listType: ListType, add: Bool){
+        TVClient.shared.PostDecodableRequest(kind: mediaType, mediaID: mediaID, listType: listType, add: add) { (success, error) in
         }
     }
     
