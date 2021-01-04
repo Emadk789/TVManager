@@ -646,6 +646,21 @@
             </objects>
             <point key="canvasLocation" x="2392.8000000000002" y="419.64017991004499"/>
         </scene>
+        <!--Details View Controller-->
+        <scene sceneID="VmQ-yq-fte">
+            <objects>
+                <viewController storyboardIdentifier="DetailsViewController" id="gmy-RL-ylW" customClass="DetailsViewController" customModule="TVManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2YU-F1-I1J">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="blU-WJ-WwT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WMi-5w-uwC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3025" y="148"/>
+        </scene>
     </scenes>
     <resources>
         <image name="heart" catalog="system" width="128" height="109"/>

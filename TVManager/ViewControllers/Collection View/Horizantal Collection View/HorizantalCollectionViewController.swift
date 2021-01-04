@@ -28,25 +28,20 @@ class HorizantalCollectionViewController: CollectionView, UICollectionViewDataSo
             cell.mediaID = mediaID
             cell.mediaType = response.mediaType
             cell.layoutIfNeeded()
-//            print("Out side", response.response.results[indexPath.item].name, mediaID)
-//            if Data.favoriteLists.favoriteTVList.contains(mediaID) {
-//                print("---In Side", response.response.results[indexPath.item].name, mediaID)
-//                cell.favoriteButton.imageView?.image = UIImage(systemName: "heart.fill")
-//            }
-//            for id in Data.favoriteLists.favoriteTVList {
-////                let itemID = mediaID
-//                print(id, mediaID)
-//                if mediaID == id {
-//                    cell.favoriteButton.imageView?.isHidden = true
-//                    cell.favoriteButton.imageView?.image = UIImage(systemName: "heart.fill")
-//                }
-//                else {
-//                    cell.favoriteButton.imageView?.image = UIImage(systemName: "heart")
-//                }
-//
-//            }
+
         }
         cell.backgroundColor = .systemBlue
         return cell;
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailsViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+//        detailsViewController.showDetailViewController(detailsViewController, sender: self)
+        detailsViewController.show(detailsViewController, sender: self)
+//        self.storyboard?.instantiateViewController(withIdentifier: "idMyViewControllerName")
+        detailsViewController.present(detailsViewController, animated: false, completion: nil)
+//        let viewController =
+//        UIViewController.present(detailsViewController)
+//        Instantiiate
     }
 }
