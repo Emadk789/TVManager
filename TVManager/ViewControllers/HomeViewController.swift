@@ -8,8 +8,13 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
-    
+class HomeViewController: UIViewController, DidSelectItem {
+    func item(_ indexPath: IndexPath) {
+        print(storyboard)
+        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+//        let detailsViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        show(vc, sender: self);
+    }
     @IBOutlet weak var verticalCollectionView: UICollectionView!
     lazy var verticalCollectionViewController = VerticalCollectionViewController();
     
@@ -28,6 +33,7 @@ class HomeViewController: UIViewController {
             verticalCollectionViewController.data = data;
         }
     }
+    var didselectItem: DidSelectItem?
     enum Kind: Int, CaseIterable {
         case PopularTV = 0, PopularMovie = 1;
     }
@@ -36,7 +42,7 @@ class HomeViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad();
-        
+        didselectItem = self
         getAccount {
             self.prepareDataLists {
                 self.getPopularRequests()

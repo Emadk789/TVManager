@@ -11,6 +11,7 @@ import UIKit
 class HorizantalCollectionViewController: CollectionView, UICollectionViewDataSource {
     var data: [UIImage?] = []
     var response: Response?
+    var didSelectItem: DidSelectItem?
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var number4 = data.count;
@@ -35,13 +36,20 @@ class HorizantalCollectionViewController: CollectionView, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailsViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+//        let detailsViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        let home = HomeViewController()
+        didSelectItem = home
+        didSelectItem?.item(indexPath)
 //        detailsViewController.showDetailViewController(detailsViewController, sender: self)
-        detailsViewController.show(detailsViewController, sender: self)
+//        detailsViewController.show(detailsViewController, sender: self)
 //        self.storyboard?.instantiateViewController(withIdentifier: "idMyViewControllerName")
-        detailsViewController.present(detailsViewController, animated: false, completion: nil)
+//        detailsViewController.present(detailsViewController, animated: false, completion: nil)
 //        let viewController =
 //        UIViewController.present(detailsViewController)
 //        Instantiiate
     }
+}
+
+protocol DidSelectItem {
+    func item(_ indexPath: IndexPath)
 }
