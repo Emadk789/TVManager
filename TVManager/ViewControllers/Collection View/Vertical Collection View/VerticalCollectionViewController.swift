@@ -9,6 +9,7 @@
 import UIKit
 
 class VerticalCollectionViewController: CollectionView, UICollectionViewDataSource {
+    var homeRef: HomeViewController?
     
     var movieData: [[UIImage?]] = [];
     var tvData: [[UIImage?]] = [];
@@ -53,6 +54,7 @@ class VerticalCollectionViewController: CollectionView, UICollectionViewDataSour
                 cell.response?.data = responses.data[indexPath.section];
                 
             }
+            cell.homeRef = homeRef
             
             
             return cell;

@@ -9,6 +9,7 @@
 import UIKit;
 
 class VerticalCollectionViewCell: UICollectionViewCell {
+    var homeRef: HomeViewController?
     var data:[UIImage?] = [] {
         didSet {
             horizantalCollectionViewController.data = data;
@@ -19,6 +20,8 @@ class VerticalCollectionViewCell: UICollectionViewCell {
         didSet {
             horizantalCollectionViewController.response = response;
             horizantalCollectionView.reloadData();
+            horizantalCollectionViewController.didSelectItemDelegate = homeRef
+            
         }
     }
 

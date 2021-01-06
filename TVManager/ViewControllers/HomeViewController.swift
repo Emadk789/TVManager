@@ -11,9 +11,16 @@ import UIKit
 class HomeViewController: UIViewController, DidSelectItem {
     func item(_ indexPath: IndexPath) {
         print(storyboard)
-        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-//        let detailsViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-        show(vc, sender: self);
+//        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        let detailsViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        detailsViewController.navigationItem.backBarButtonItem?.title = "Yellow"
+//        detailsViewController.navigationItem.
+//        show(detailsViewController, sender: self)
+//        present(detailsViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(detailsViewController, animated: true)
+//        navigationController?.pushViewController(detailsViewController, animated: true)
+//        show(detailsViewController, sender: self);
     }
     @IBOutlet weak var verticalCollectionView: UICollectionView!
     lazy var verticalCollectionViewController = VerticalCollectionViewController();
@@ -33,7 +40,7 @@ class HomeViewController: UIViewController, DidSelectItem {
             verticalCollectionViewController.data = data;
         }
     }
-    var didselectItem: DidSelectItem?
+    var didselectItem: HorizantalCollectionViewController?
     enum Kind: Int, CaseIterable {
         case PopularTV = 0, PopularMovie = 1;
     }
@@ -42,7 +49,7 @@ class HomeViewController: UIViewController, DidSelectItem {
     }
     override func viewDidLoad() {
         super.viewDidLoad();
-        didselectItem = self
+//        didselectItem?.didSelectItemDelegate = self
         getAccount {
             self.prepareDataLists {
                 self.getPopularRequests()
@@ -52,10 +59,17 @@ class HomeViewController: UIViewController, DidSelectItem {
         verticalCollectionView.delegate = verticalCollectionViewController;
         verticalCollectionView.dataSource = verticalCollectionViewController;
         
+        verticalCollectionViewController.homeRef = self
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("I am in view will appear", Data.favoriteLists.favoriteTVList)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     

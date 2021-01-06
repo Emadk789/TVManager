@@ -11,7 +11,7 @@ import UIKit
 class HorizantalCollectionViewController: CollectionView, UICollectionViewDataSource {
     var data: [UIImage?] = []
     var response: Response?
-    var didSelectItem: DidSelectItem?
+    var didSelectItemDelegate: DidSelectItem?
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var number4 = data.count;
@@ -37,9 +37,9 @@ class HorizantalCollectionViewController: CollectionView, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        let detailsViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-        let home = HomeViewController()
-        didSelectItem = home
-        didSelectItem?.item(indexPath)
+//        let home = HomeViewController()
+//        didSelectItem = home
+        didSelectItemDelegate?.item(indexPath)
 //        detailsViewController.showDetailViewController(detailsViewController, sender: self)
 //        detailsViewController.show(detailsViewController, sender: self)
 //        self.storyboard?.instantiateViewController(withIdentifier: "idMyViewControllerName")
