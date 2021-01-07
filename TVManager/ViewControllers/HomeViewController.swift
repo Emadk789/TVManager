@@ -9,18 +9,13 @@
 import UIKit
 
 class HomeViewController: UIViewController, DidSelectItem {
-    func item(_ indexPath: IndexPath) {
-        print(storyboard)
-//        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+    func item(_ indexPath: IndexPath, response: Response?, poster: UIImage?) {
+
         let detailsViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-        navigationController?.setNavigationBarHidden(false, animated: false)
-        detailsViewController.navigationItem.backBarButtonItem?.title = "Yellow"
-//        detailsViewController.navigationItem.
-//        show(detailsViewController, sender: self)
-//        present(detailsViewController, animated: true, completion: nil)
+        detailsViewController.response = response
+        detailsViewController.poster = poster
         self.navigationController?.pushViewController(detailsViewController, animated: true)
-//        navigationController?.pushViewController(detailsViewController, animated: true)
-//        show(detailsViewController, sender: self);
+
     }
     @IBOutlet weak var verticalCollectionView: UICollectionView!
     lazy var verticalCollectionViewController = VerticalCollectionViewController();

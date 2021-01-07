@@ -28,6 +28,7 @@ class HorizantalCollectionViewController: CollectionView, UICollectionViewDataSo
             cell.imageView.image = response.data[indexPath.item];
             cell.mediaID = mediaID
             cell.mediaType = response.mediaType
+//            cell.response = response
             cell.layoutIfNeeded()
 
         }
@@ -39,7 +40,7 @@ class HorizantalCollectionViewController: CollectionView, UICollectionViewDataSo
 //        let detailsViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
 //        let home = HomeViewController()
 //        didSelectItem = home
-        didSelectItemDelegate?.item(indexPath)
+        didSelectItemDelegate?.item(indexPath, response: response, poster: response?.data[indexPath.item])
 //        detailsViewController.showDetailViewController(detailsViewController, sender: self)
 //        detailsViewController.show(detailsViewController, sender: self)
 //        self.storyboard?.instantiateViewController(withIdentifier: "idMyViewControllerName")
@@ -51,5 +52,5 @@ class HorizantalCollectionViewController: CollectionView, UICollectionViewDataSo
 }
 
 protocol DidSelectItem {
-    func item(_ indexPath: IndexPath)
+    func item(_ indexPath: IndexPath, response: Response?, poster: UIImage?)
 }

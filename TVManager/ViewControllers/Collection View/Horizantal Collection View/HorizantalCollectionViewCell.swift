@@ -13,6 +13,7 @@ class HorizantalCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var watchlistButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
 //    var mediaID = 0;
+//    var response: Response?
     var mediaID = 0 {
         didSet {
             updateViews()
@@ -71,7 +72,6 @@ class HorizantalCollectionViewCell: UICollectionViewCell {
     
     private func updateViews() {
         if Data.favoriteLists.favoriteTVList.contains(mediaID) || Data.favoriteLists.favoriteMovieList.contains(mediaID) {
-            print("yes")
             favoriteButton.imageView?.image = UIImage(systemName: "heart.fill")
         }
         if Data.watchlistLists.watchlistTVList.contains(mediaID) || Data.watchlistLists.watchlistMovieList.contains(mediaID) {
