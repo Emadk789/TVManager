@@ -10,8 +10,10 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-    var response: Response?
+    var result: Result?
     var poster: UIImage?
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
@@ -30,9 +32,15 @@ extension DetailsViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! DetailsViewControllerCell
-        cell.imageView.backgroundColor = .systemRed
+//        cell.imageView.backgroundColor = .systemRed
         cell.imageView.image = poster
-        cell.backgroundColor = .systemBlue
+//        cell.backgroundColor = .systemBlue
+//        let x =
+        cell.label1.text = result?.overview ?? ""
+        cell.label2.text = ((result?.name!)!) + "1"
+        cell.label3.text = result!.originalName! + "2"
+//        cell.label4.text = result.
+        print(result?.overview ?? "")
         return cell
     }
     
@@ -41,6 +49,12 @@ extension DetailsViewController: UICollectionViewDelegate, UICollectionViewDataS
 // MARK:- DetailsViewControllerCell
 class DetailsViewControllerCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var label1: UILabel!
+    @IBOutlet weak var label2: UILabel!
+    @IBOutlet weak var label3: UILabel!
+    @IBOutlet weak var label4: UILabel!
+    @IBOutlet weak var label5: UILabel!
     
 }
 

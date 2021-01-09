@@ -12,7 +12,7 @@ class HomeViewController: UIViewController, DidSelectItem {
     func item(_ indexPath: IndexPath, response: Response?, poster: UIImage?) {
 
         let detailsViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-        detailsViewController.response = response
+        detailsViewController.result = response?.response.results[indexPath.item]
         detailsViewController.poster = poster
         self.navigationController?.pushViewController(detailsViewController, animated: true)
 

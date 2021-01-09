@@ -53,4 +53,5 @@ class HorizantalCollectionViewController: CollectionView, UICollectionViewDataSo
 
 protocol DidSelectItem {
     func item(_ indexPath: IndexPath, response: Response?, poster: UIImage?)
+    
 }
